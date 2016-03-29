@@ -1,0 +1,588 @@
+/* reset */
+html,body,ul{ margin: 0; padding: 0;}
+body{ background-color: #eaeaea ; font-family: "Microsoft YaHei"; color: gray; position: relative;}
+ul{ list-style: none; }
+.wid{ width: 1000px;}
+.clearfix::after
+{ 
+	content:".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+a{ text-decoration: none; color: gray;}
+/* 鼠标hover样式 */
+.a:hover,.bar:hover,.mouse:hover,.keychoose
+{
+	color: orange;
+}
+.mouse:hover,.keychoose
+{ 
+	box-shadow: 0 0 1px 2px rgba( 240,240,240,.8) inset;
+	background-color: rgba( 250,250,250,.6) ;
+}
+.rotate
+{
+	transition: all .3s;
+}
+.rotate:hover
+{
+	transform: rotate(180deg);
+}
+/* 小按钮 */
+.input_bar
+{
+	height: 30px;
+	width: 60px;
+	border: none;
+	background: url("../images/bar_bg.png") no-repeat;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	font-weight: 800;
+	letter-spacing: 5px;
+	padding-right: 2px;
+	color: gray;
+	cursor: pointer;
+}
+.bar
+{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	color: gray;
+	cursor: pointer;
+}
+#local_screen
+{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	/*width: 900px;
+	height: 900px;*/
+	background-color: rgba(100,100,100,.5);
+	z-index: 999;
+}
+
+
+
+/* header css */
+#header
+{
+	min-width: 1000px;
+	height: 70px;
+	border-bottom: 2px solid rgba(0,0,0,.1);
+	background-color: rgb(28, 28, 28) ;
+}
+#header nav
+{
+	margin: 0 auto;
+}
+#header .logo
+{
+	float: left;
+	height: 70px;
+	margin-left: 10px;
+}
+#header .right_bar
+{
+	float: right;
+	margin-top: 20px;
+	margin-right: 10px;
+	height: 70px;
+	line-height: 38px;
+}
+#header .set_bar
+{
+	background: url("../images/menu_bg.png") no-repeat right center ;
+	height: 40px;
+	width: 100px;
+	/*border-bottom: 1px solid rgba(0, 0, 0, 0.2);*/
+	font: 17px/40px "Microsoft YaHei";
+	padding-left: 5px;
+	color: gray;
+	position: relative;
+	cursor: pointer;
+	float: left;
+}
+#header .set_bar span
+{
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	background: url("../images/menu_click.png") no-repeat;
+	position: absolute;
+	top: 12px;
+	right: 1px;
+	transform-origin: 40% 30%;
+	-webkit-transform-origin: 40% 30%;
+	-o-transform-origin: 40% 30%;
+	-ms-transform-origin: 40% 30%;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	-o-transition: all .3s;
+	-ms-transition: all .3s;
+}
+/* 点击旋转 .click */
+#header .click:hover span{
+	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+}
+/* header-ul css  */
+#header .bar_ul
+{
+	display: none;
+	width: 78px;
+	height: 0px;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	border: 1px solid rgba(100,100,100,.1);
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	box-shadow: 0 0 1px 1px rgba(0,0,0,.1);
+	-webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,.1);
+	-o-box-shadow: 0 0 1px 1px rgba(0,0,0,.1);
+	-ms-box-shadow: 0 0 1px 1px rgba(0,0,0,.1);
+	background-color: #eaeaea;
+	position: absolute;
+	top: 40px;
+	right: 15px;
+	opacity: 0;
+}
+#header .bar_ul li
+{
+	list-style: none;
+	height: 30px;
+	width: 78px;
+	line-height: 30px;
+}
+#header ul li a
+{
+    display: block;
+    height:30px;
+	width: 73px;
+    letter-spacing: 10px;
+    padding-left: 5px;
+}
+
+/* 头部-登录 注册 */
+#header .login,#header .regiter
+{
+	float: left;
+	margin-left: 3px;
+	font: 17px/40px "Microsoft YaHei";
+}
+#header .login
+{
+	margin-left: 10px;
+}
+/* 登录框 注册框 */
+#login,#reg
+{	
+	background-color: #eaeaea ;
+	border: 1px solid rgba(0,0,0,.1);
+	box-shadow: 0 0 3px 3px rgba(0,0,0,.1);
+	-webkit-box-shadow: 0 0 3px 3px rgba(0,0,0,.1);
+	-ms-box-shadow: 0 0 3px 3px rgba(0,0,0,.1);
+	-o-box-shadow: 0 0 3px 3px rgba(0,0,0,.1);
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	text-align: center;
+	position: absolute;
+	z-index: 1000;
+}
+#login
+{
+	display: none;
+	width: 298px;
+	height: 208px;
+}
+#reg
+{
+	width: 500px;
+	height: 610px;
+/* 	display: none; */
+}
+#login h2,#reg h2
+{
+	height: 38px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 18px;
+	margin: 0;
+	padding: 0;
+	border-bottom: 2px solid rgba(200,200,200,.4);
+	position: relative;
+	cursor: move;
+}
+#login h2 img,#reg h2 img
+{
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	cursor: pointer;
+
+}
+#login p
+{
+	margin-left: -3px;
+}
+#reg p
+{
+	text-align: left;
+	margin-left: 30px;
+	width: 245px;
+	position: relative;
+}
+#reg .ps_p
+{
+	width: 300px;
+}
+#user,#pass,#reg_user,#reg_pass,#reg_check,#reg_ques,#reg_ans,#reg_email,#reg_date
+{
+	padding-left: 10px;
+	height: 35px;
+	width: 153px;
+	background: url("../images/input_bg.png") no-repeat;
+	border: none;
+	outline: none;
+}
+/*表单伪元素控制样式设置*/
+::-webkit-inner-spin-button
+{
+	display: none;
+}
+::-webkit-calendar-picker-indicator
+{
+	background-color: orange;
+	margin-right: 20px;
+}
+select/*清除下拉按钮*/
+{
+	appearance: none;
+  	-moz-appearance: none;
+  	-webkit-appearance: none;
+/*   	background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+  	padding-right: 14px; */
+}
+select::-ms-expand{ display: none;}
+#login .login_reg,#reg .reg_reg
+{
+	margin-left: 10px;
+}
+#reg_ps
+{
+	width: 200px;
+	height: 100px;
+}
+#reg .ps_label
+{
+	vertical-align: top;
+}
+#reg .text_number
+{
+	font-size: 10px;
+	padding-left: 190px;
+	margin-top: -15px;
+}
+/* 提示信息 */
+#reg .info
+{
+	display: block;
+	width: 200px;
+	height: 30px;
+	top: -5px;
+	position: absolute;
+	left: 245px;
+	font-size: 10px;
+	padding-top: 10px;
+	padding-left: 45px;
+}
+#reg .info_user
+{
+	background: url("../images/info-tip.png") no-repeat;
+	width: 220px;
+	height: 53px;
+	padding-left: 30px;
+	line-height: 23px;
+	top: -15px;
+	left: 240px;
+	display: none;
+}
+#reg .info_pass
+{
+	background: url("../images/info-pass.png") no-repeat;
+	width: 220px;
+	height: 100px;
+	padding-left: 10px;
+	top: -30px;
+	left: 240px;
+	display: none;
+}
+#reg .info_check,#reg .info_ans,#reg .info_email
+{
+	background: url("../images/info-tip.png") no-repeat 0 -65px;
+	top: 0;
+	padding-left: 32px;
+	letter-spacing: 5px;
+	line-height: 13px;
+	display: none;
+}
+#reg .info_pass span
+{
+	display: block;
+	width: 210px;
+	color: #eee;
+	margin-top: 5px;
+}
+#reg .info_pass span:first-child
+{
+	margin-top: -2px;
+}
+#reg .info_pass .s
+{
+	vertical-align: 2px;
+	margin-right: 3px;
+}
+#reg .info_pass .s4
+{
+	padding-left: 5px;
+	vertical-align: 1px;
+}
+#reg .info_pass .tip
+{
+	display: inline-block;
+	height: 5px;
+	width: 5px;
+	background-color: #eee;
+	margin-right: 3px;
+	vertical-align: 3px;
+}
+#reg .email_tip
+{
+	position: absolute;
+	background-color: #eee;
+	width: 150px;
+	border: 1px solid #fff;
+	border-bottom: 0;
+	left: 110px;
+	top: 350px;
+	font-size: 10px;
+	text-align: left;
+	border-radius: 5px;
+	z-index: 1000;
+	display: none;
+}
+#reg .email_tip li
+{
+	border-bottom: 1px solid #fff;
+	padding-left: 5px;
+	height: 25px;
+	line-height: 25px;
+	cursor: pointer;
+}
+#reg .error_user,#reg .error_pass,#reg .error_check,#reg .error_ans,#reg .error_email
+{
+	background: url("../images/info-mes.png") no-repeat 0 -40px;
+	letter-spacing: 3px;
+	display: none;
+}
+#reg .error_check,#reg .error_ans,#reg .error_email
+{
+	letter-spacing: 0;
+}
+#reg .right_user,#reg .right_pass,#reg .right_check,#reg .right_ans,#reg .right_email
+{
+	background: url("../images/info-mes.png") no-repeat;
+	letter-spacing: 3px;
+	display: none;
+}
+/* main */
+#main
+{
+	width: 900px;
+	margin: 20px auto; /* 注意这里必须要大于20 才能使内部元素顶部对齐，因为header右侧部分有元素下移了20px，印象了main中元素的对齐*/
+}
+#main .side_bar
+{
+	width: 250px;
+	height: 560px;
+	background-color: #eee;
+	float: left;
+}
+#main .side_bar h2
+{
+	width: 248px;
+	height: 29px;
+	line-height: 30px;
+	margin: 0;
+	font-size: 14px;
+	background-color:#dbdbdb;
+	text-indent: 10px;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	cursor: pointer;
+}
+#main .side_bar ul
+{
+	width: 248px;
+	height: 148px;
+	border: 1px solid #ccc;
+	margin: 0 0 10px 0;
+	overflow: hidden;
+	opacity: 1;
+}
+#main .side_bar ul:lastchild()
+{
+	margin-bottom: 0;
+}
+#main .side_bar ul li
+{
+	height: 30px;
+	line-height: 30px;
+	text-indent: 30px;
+}
+#main .main_content
+{
+	width: 630px;
+	height: 560px;
+	background-color: #eee;
+	float: right;
+}
+/* main_nav */
+#main .main_nav
+{
+	width: 465px;
+	height: 30px;
+	background:linear-gradient( to bottom,rgb(238,238,238),rgb(180,180,180) );
+	text-align: center;
+	position: fixed;
+	bottom: 1px;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	box-shadow: 0 2px 1px 2px rgba(130,130,130,.5);
+}
+#main .main_black,#main .main_white,#main .clear_bug
+{
+	height: 30px;
+	width: 425px;
+	margin: 0 auto;
+}
+#main .clear_bug{
+	position: absolute;
+	top: 0;
+	left: 20px;
+}
+#main .main_nav li
+{
+	width: 85px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+}
+#main .main_white
+{
+	position: absolute;
+	left: 0px;
+}
+#main .main_white a
+{
+	color: orange;
+}
+#main .chose_box
+{
+	width: 85px;
+	height: 30px;
+	background:linear-gradient( to bottom,rgb(150,150,150),rgb(80,80,80) );
+	position: absolute;
+	left: 20px;
+	top: 0;
+	overflow: hidden;
+}
+/* share-css */
+#share_box
+{
+	position: fixed;
+	width: 74px;
+	height: 200px;
+	top: 200px;
+	right:0;
+	overflow: hidden;
+}
+#share,#share h2
+{
+	border-radius: 5px 0 0 5px;
+}
+#share
+{
+	position: absolute;
+	height: 200px;
+	width: 50px;
+	right: -50px;
+	background-color: rgba(100,100,100,.5);
+}
+#share h2
+{
+	margin: 0;
+	padding: 0 0 0 2px;
+	font-size: 16px;
+	text-align: center;
+	font-weight: normal;
+	cursor: pointer;
+	position: absolute;
+	display: block;
+	width: 22px;
+	height: 80px;
+	right: 50px;
+	top: 60px;
+	line-height: 40px;
+	background-color:rgb(28, 28, 28);
+}
+#share ul
+{
+	width: 40px;
+	height: 150px;
+	margin: 25px auto 0;
+}
+#share ul li
+{
+	width: 40px;
+	height: 40px;
+	margin-top: 40px;
+	position: relative;
+	border-radius: 5px;
+	overflow: hidden;
+	cursor: pointer;
+}
+#share ul li a
+{
+	display: block;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	width: 40px;
+	height: 40px;
+	background: url('../images/share.png') no-repeat;
+}
+#share .weixin
+{
+	background-position: -42px 0;
+}

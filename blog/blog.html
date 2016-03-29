@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>博客前端</title>
+	<script src="../js/tool.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="../js/base.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="../js/base_drag.js" type="text/javascript" charset="UTF-8"></script>
+	<link rel="stylesheet" href="css/blog.css" />
+</head>
+<body>
+	
+	<header id="header"><!-- 头文件开始 -->
+		<nav class="wid clearfix">
+			<img class="logo" src="images/logo.png" alt="logo">
+			<div class="right_bar"><!-- 头部右边菜单开始 -->
+				<div class="set_bar">个人中心<span></span>
+					<ul class="bar_ul">
+						<li><a class="a" href="#">设置</a></li>
+						<li><a class="a" href="#">换肤</a></li>
+						<li><a class="a" href="#">帮助</a></li>
+						<li><a class="a" href="#">退出</a></li>
+					</ul>
+				</div>
+				<span class="login bar">登录</span>
+				<span class="regiter bar">注册</span>	
+			</div><!-- 头部右边菜单结束 -->
+		</nav>
+		<!-- 登录表单开始 -->
+		<form action="" id="login"><!-- 登陆表单开始 -->
+			<h2 id="login_h2" class="login_h2">登&nbsp;&nbsp;录
+				<img class="rotate login_closed" src="images/closed_btn.png" />
+			</h2>
+			<p><label for="uesr">账 号：</label><input id="user" name="login_user" type="text" placeholder="电子邮件\电话号码"></p>
+			<p><label for="pass">密 码：</label><input id="pass"  name="login_pass" type="password"></p>
+			<input class="login_sub input_bar mouse" type="submit" value="登录">
+			<input class="login_reg input_bar mouse" type="button" value="注册">
+		</form><!-- 登陆表单结束 -->
+
+		<!-- 注册表单开始 -->
+		<form action="" id="reg"><!-- 注册表单开始 -->
+			<h2 id="reg_h2" class="reg_h2">账&nbsp;号&nbsp;注&nbsp;册
+				<img class="rotate reg_closed" src="images/closed_btn.png" />
+			</h2>
+			<p>
+				<label for="reg_uesr">账 &nbsp; &nbsp; &nbsp; 号：</label><input id="reg_user"  name="reg_user" type="text" placeholder="输入账号">
+				<span class="info info_user">请输入用户名，2-10位，不得包括除‘_‘的其他字符</span>
+				<span class="info error_user">用户名错误或已注册！</span>
+				<span class="info right_user">该用户名可用！</span>
+			</p>
+			<p>
+				<label for="reg_pass">密 &nbsp; &nbsp; &nbsp; 码：</label><input id="reg_pass"  name="reg_pass" type="password">
+				<span class="info info_pass">
+					<span>安全级别：<strong class="s s1">■</strong><strong class="s s2">■</strong><strong class="s s3">■</strong><strong class="s4"></strong></span>
+					<span><strong class="tip tip1"></strong>6 - 20个字符</span>
+					<span><strong class="tip tip2"></strong>只能含大小写字母-数字-非空格字符</span>
+					<span><strong class="tip tip3"></strong>大小写字母-数字-非空字符2种以上</span>
+				</span>
+				<span class="info error_pass">密码不合法！</span>
+				<span class="info right_pass">密码可用！</span>
+			</p>
+			<p>
+				<label for="reg_check">确认密码：</label><input id="reg_check"  name="reg_check" type="password">
+				<span class="info info_check">请再输入一次密码!</span>
+				<span class="info error_check">密码不一致，请重新输入！</span>
+				<span class="info right_check">正确Binggo！</span>
+			</p>
+			<p><label for="reg_ques">提 &nbsp; &nbsp; &nbsp; 问：</label><select name="reg_ques" id="reg_ques">
+				<option value="0" class="reg_select">--请选择--</option>
+				<option value="1" class="reg_select">--您的出生地--</option>
+				<option value="2" class="reg_select">--您的电话号码--</option>
+				<option value="3" class="reg_select">--喜欢的偶像--</option>
+				<option value="4" class="reg_select">--爱人的全拼--</option>
+			</select></p>
+			<p>
+				<label for="reg_ans">答 &nbsp; &nbsp; &nbsp; 案：</label><input id="reg_ans"  name="reg_ans" type="text">
+				<span class="info info_ans">请输入2-32位答案!</span>
+				<span class="info error_ans">回答不合法，请重新输入！</span>
+				<span class="info right_ans">可用Binggo！</span>
+			</p>
+			<p>
+				<label for="reg_email">电子邮件：</label><input id="reg_email"  name="reg_email" type="text" autocomplete="off">
+				<span class="info info_email">请输入邮件地址!</span>
+				<span class="info error_email">邮件不合法，请重新输入！</span>
+				<span class="info right_email">可用Binggo！</span>
+				<ul class="email_tip">
+					<li class="mouse"><span></span>@qq.com</li>
+					<li class="mouse"><span></span>@163.com</li>
+					<li class="mouse"><span></span>@sina.com</li>
+					<li class="mouse"><span></span>@gmail.com</li>
+					<li class="mouse"><span></span>@soho.com</li>
+				</ul>
+			</p>
+			<p><label for="reg_date">生 &nbsp; &nbsp; &nbsp; 日：</label><input id="reg_date"  name="reg_date" type="date"></p>
+			<p class="ps_p"><label class="ps_label" for="reg_ps">备 &nbsp; &nbsp; &nbsp; 注：</label><textarea id="reg_ps"  name="reg_ps"></textarea></p>
+			<p class='text_number'>还可以输入<span>200</span>字</p>
+			<input class="reg_sub input_bar mouse" type="submit" value="登录">
+			<input class="reg_reg input_bar mouse" type="button" value="注册">
+		</form><!-- 注册表单结束 -->
+	</header><!-- 头文件结束 -->
+	
+	
+	<section id="main" class="clearfix">
+		<div class="side_bar">
+			<h2 class="mouse">title-1</h2>
+			<ul>
+				<li><a class="a" href="#">new________a</a></li>
+				<li><a class="a" href="#">new________a</a></li>
+				<li><a class="a" href="#">new________a</a></li>
+				<li><a class="a" href="#">new________a</a></li>
+				<li><a class="a" href="#">new________a</a></li>
+			</ul>
+			<h2 class="mouse">title-2</h2>
+			<ul>
+				<li><a class="a" href="#">new________b</a></li>
+				<li><a class="a" href="#">new________b</a></li>
+				<li><a class="a" href="#">new________b</a></li>
+				<li><a class="a" href="#">new________b</a></li>
+				<li><a class="a" href="#">new________b</a></li>
+			</ul>
+			<h2 class="mouse">title-3</h2>
+			<ul>
+				<li><a class="a" href="#">new________c</a></li>
+				<li><a class="a" href="#">new________c</a></li>
+				<li><a class="a" href="#">new________c</a></li>
+				<li><a class="a" href="#">new________c</a></li>
+				<li><a class="a" href="#">new________c</a></li>
+			</ul>
+		</div>
+		<div class="main_content"></div>
+		
+		<div class="main_nav">
+			<ul class="main_black clearfix">
+				<li><a href="#">News</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Elements</a></li>
+				<li><a href="#">Number</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
+			<div class="chose_box">
+				<ul class="main_white clearfix">
+					<li><a href="#">News</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Elements</a></li>
+					<li><a href="#">Number</a></li>
+					<li><a href="#">About</a></li>
+				</ul>
+			</div>
+			<ul class="clear_bug">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</section>
+	
+	<section>
+		<p>1</p><p>1</p><p>1</p><p>1</p><p>1</p>
+		<p>1</p><p>1</p><p>1</p><p>1</p><p>1</p>
+	</section>
+
+	
+
+	
+	<footer></footer>	
+	
+	<div id="share_box"><!-- 分享栏开始 -->
+		<div id="share">
+			<h2 class='bar'>分<br/>享</h2>
+			<ul>
+				<li class="mouse"><a class="weixin" href="#"></a></li>
+				<li class="mouse"><a class="weibo" href="#"></a></li>
+			</ul>
+		</div>
+	</div><!-- 分享栏结束 -->
+	<div id="local_screen"></div><!-- 遮罩 -->
+	
+	<script src="js/blog.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="js/check_form.js" type="text/javascript" charset="UTF-8"></script>
+</body>
+</html>
