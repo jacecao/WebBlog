@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>AjaxTest</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+</head>
+
+<body>
+	
+    <header>
+    	<div class="header">AjaxTest</div>	
+    </header>
+    
+    <div id="main">
+    	<div id="formbody">
+        	<h1>Employee Search</h1>
+            <div id="formTest1">
+        		<label for="keyword">Please input EmployeeNum：</label>
+				<input type="text" id="keyword" />
+				<button id="search">Search</button>
+				<p id="searchResult"></p>
+        	</div>
+            <h1 class="h1_2">Add Newemployee</h1>
+            <div id="formTest2">
+        		<table>
+                	<tbody>
+                    	<tr>
+                        	<td><label for="staffName">Name：</label></td>
+                            <td><input type="text" id="staffName" /></td>
+                        </tr>
+                        <tr>
+                        	<td><label for="staffNumber">Number：</label></td>
+                            <td><input type="text" id="staffNumber" /></td>
+                        </tr>
+                        <tr>
+                        	<td><label for="staffSex">Sex：</label></td>
+                            <td>
+                            <select id="staffSex">
+                                <option>woman</option>
+                                <option>man</option>
+                            </select>	
+                			</td>
+                        </tr>
+                        <tr>
+                        	<td><label for="staffJob">Job：</label></td>
+                            <td><input type="text" id="staffJob" /></td>
+                        </tr>
+                        <tr>
+                        	<td cospan="2"><button id="save">Save</button></td>
+                        </tr>
+                        <tr><td cosplan-"2"><p id="createResult"></p></td></tr>
+                    </tbody>
+                </table>
+        	</div> 
+        </div>
+    </div>
+    
+    <footer>
+    	<div>&copy Jace —2015</div>
+    </footer>	
+    
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
