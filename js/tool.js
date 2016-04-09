@@ -169,3 +169,11 @@ var setInnerText = function( ele,text )
 		ele.innerText = text;
 	}
 };
+//判断某个值是否在某个数组中
+var inArray = function( array,value )
+{
+	for( var i in array )
+	{
+		return array[i] === value ? true : false;
+	}
+};

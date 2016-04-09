@@ -66,7 +66,7 @@ a{ text-decoration: none; color: gray;}
 	/*width: 900px;
 	height: 900px;*/
 	background-color: rgba(100,100,100,.5);
-	z-index: 999;
+	z-index: 800;
 }
 
 
@@ -191,6 +191,7 @@ a{ text-decoration: none; color: gray;}
 #login,#reg
 {	
 	background-color: #eaeaea ;
+	font-size: 16px;
 	border: 1px solid rgba(0,0,0,.1);
 	box-shadow: 0 0 3px 3px rgba(0,0,0,.1);
 	-webkit-box-shadow: 0 0 3px 3px rgba(0,0,0,.1);
@@ -202,18 +203,19 @@ a{ text-decoration: none; color: gray;}
 	-o-border-radius: 5px;
 	text-align: center;
 	position: absolute;
-	z-index: 1000;
 }
 #login
 {
 	display: none;
 	width: 298px;
 	height: 208px;
+	z-index: 1000;
 }
 #reg
 {
 	width: 500px;
 	height: 610px;
+	z-index: 900;
 /* 	display: none; */
 }
 #login h2,#reg h2
@@ -243,15 +245,15 @@ a{ text-decoration: none; color: gray;}
 #reg p
 {
 	text-align: left;
-	margin-left: 30px;
-	width: 245px;
+	margin-left: 20px;
+	width: 250px;
 	position: relative;
 }
 #reg .ps_p
 {
 	width: 300px;
 }
-#user,#pass,#reg_user,#reg_pass,#reg_check,#reg_ques,#reg_ans,#reg_email,#reg_date
+#user,#pass,#reg_user,#reg_pass,#reg_check,#reg_ques,#reg_ans,#reg_email
 {
 	padding-left: 10px;
 	height: 35px;
@@ -259,6 +261,21 @@ a{ text-decoration: none; color: gray;}
 	background: url("../images/input_bg.png") no-repeat;
 	border: none;
 	outline: none;
+}
+#reg_ques
+{
+	margin-left: -5px;
+}
+#reg .reg_date
+{
+	width: 40px;
+	font-size: 10px;
+	height: 20px;
+	text-align: center;
+}
+#reg #reg_year
+{
+	width: 60px;
 }
 /*表单伪元素控制样式设置*/
 ::-webkit-inner-spin-button
@@ -272,9 +289,9 @@ a{ text-decoration: none; color: gray;}
 }
 select/*清除下拉按钮*/
 {
-	appearance: none;
+	/*appearance: none;
   	-moz-appearance: none;
-  	-webkit-appearance: none;
+  	-webkit-appearance: none;*/
 /*   	background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
   	padding-right: 14px; */
 }
@@ -295,8 +312,21 @@ select::-ms-expand{ display: none;}
 #reg .text_number
 {
 	font-size: 10px;
-	padding-left: 190px;
+	padding-left: 170px;
 	margin-top: -15px;
+	display: none;
+}
+#reg .text_number .number
+{
+	color: red;
+}
+#reg .text_clear
+{
+	cursor: pointer;
+	color: orange;
+	letter-spacing: 3px;
+	font-weight: bold;
+	margin-left: 10px;
 }
 /* 提示信息 */
 #reg .info
@@ -314,9 +344,9 @@ select::-ms-expand{ display: none;}
 #reg .info_user
 {
 	background: url("../images/info-tip.png") no-repeat;
-	width: 220px;
+	width: 189px;
 	height: 53px;
-	padding-left: 30px;
+	padding-left: 31px;
 	line-height: 23px;
 	top: -15px;
 	left: 240px;
@@ -328,7 +358,7 @@ select::-ms-expand{ display: none;}
 	width: 220px;
 	height: 100px;
 	padding-left: 10px;
-	top: -30px;
+	top: -37px;
 	left: 240px;
 	display: none;
 }
@@ -344,9 +374,9 @@ select::-ms-expand{ display: none;}
 #reg .info_pass span
 {
 	display: block;
-	width: 210px;
+	width: 220px;
 	color: #eee;
-	margin-top: 5px;
+	margin-top: 3px;
 }
 #reg .info_pass span:first-child
 {
@@ -394,7 +424,7 @@ select::-ms-expand{ display: none;}
 	line-height: 25px;
 	cursor: pointer;
 }
-#reg .error_user,#reg .error_pass,#reg .error_check,#reg .error_ans,#reg .error_email
+#reg .error_user,#reg .error_pass,#reg .error_check,#reg .error_ques,#reg .error_ans,#reg .error_email
 {
 	background: url("../images/info-mes.png") no-repeat 0 -40px;
 	letter-spacing: 3px;
@@ -467,16 +497,16 @@ select::-ms-expand{ display: none;}
 {
 	width: 465px;
 	height: 30px;
-	background:linear-gradient( to bottom,rgb(238,238,238),rgb(180,180,180) );
+	background:linear-gradient( to bottom,rgb(245,245,245),rgb(136,136,136) );
 	text-align: center;
 	position: fixed;
-	bottom: 1px;
+	bottom: 5px;
 	left: 50%;
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 	-o-transform: translateX(-50%);
 	-ms-transform: translateX(-50%);
-	box-shadow: 0 2px 1px 2px rgba(130,130,130,.5);
+	/*box-shadow: 0 2px 1px 2px rgba(130,130,130,.5);*/
 }
 #main .main_black,#main .main_white,#main .clear_bug
 {
@@ -494,6 +524,7 @@ select::-ms-expand{ display: none;}
 	width: 85px;
 	height: 30px;
 	line-height: 30px;
+	font-size: 12px;
 	text-align: center;
 	float: left;
 	cursor: pointer;

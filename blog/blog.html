@@ -39,22 +39,22 @@
 
 		<!-- 注册表单开始 -->
 		<form action="" id="reg"><!-- 注册表单开始 -->
-			<h2 id="reg_h2" class="reg_h2">账&nbsp;号&nbsp;注&nbsp;册
+			<h2 id="reg_h2" class="reg_h2">账 号 注 册
 				<img class="rotate reg_closed" src="images/closed_btn.png" />
 			</h2>
 			<p>
-				<label for="reg_uesr">账 &nbsp; &nbsp; &nbsp; 号：</label><input id="reg_user"  name="reg_user" type="text" placeholder="输入账号">
+				<label for="reg_uesr">账&nbsp; &nbsp; &nbsp; &nbsp;号：</label><input id="reg_user"  name="reg_user" type="text" placeholder="输入账号">
 				<span class="info info_user">请输入用户名，2-10位，不得包括除‘_‘的其他字符</span>
 				<span class="info error_user">用户名错误或已注册！</span>
 				<span class="info right_user">该用户名可用！</span>
 			</p>
 			<p>
-				<label for="reg_pass">密 &nbsp; &nbsp; &nbsp; 码：</label><input id="reg_pass"  name="reg_pass" type="password">
+				<label for="reg_pass">密&nbsp; &nbsp; &nbsp; &nbsp;码：</label><input id="reg_pass"  name="reg_pass" type="password">
 				<span class="info info_pass">
 					<span>安全级别：<strong class="s s1">■</strong><strong class="s s2">■</strong><strong class="s s3">■</strong><strong class="s4"></strong></span>
 					<span><strong class="tip tip1"></strong>6 - 20个字符</span>
-					<span><strong class="tip tip2"></strong>只能含大小写字母-数字-非空格字符</span>
-					<span><strong class="tip tip3"></strong>大小写字母-数字-非空字符2种以上</span>
+					<span><strong class="tip tip2"></strong>仅许大小写字母-数字-非空字符</span>
+					<span><strong class="tip tip3"></strong>大小写字母-数字-非空符2种以上</span>
 				</span>
 				<span class="info error_pass">密码不合法！</span>
 				<span class="info right_pass">密码可用！</span>
@@ -65,15 +65,19 @@
 				<span class="info error_check">密码不一致，请重新输入！</span>
 				<span class="info right_check">正确Binggo！</span>
 			</p>
-			<p><label for="reg_ques">提 &nbsp; &nbsp; &nbsp; 问：</label><select name="reg_ques" id="reg_ques">
-				<option value="0" class="reg_select">--请选择--</option>
-				<option value="1" class="reg_select">--您的出生地--</option>
-				<option value="2" class="reg_select">--您的电话号码--</option>
-				<option value="3" class="reg_select">--喜欢的偶像--</option>
-				<option value="4" class="reg_select">--爱人的全拼--</option>
-			</select></p>
 			<p>
-				<label for="reg_ans">答 &nbsp; &nbsp; &nbsp; 案：</label><input id="reg_ans"  name="reg_ans" type="text">
+				<label for="reg_ques">提&nbsp; &nbsp; &nbsp; &nbsp;问：</label>
+				<select name="reg_ques" id="reg_ques">
+					<option value="0" class="reg_select">--请选择--</option>
+					<option value="1" class="reg_select">--您的出生地--</option>
+					<option value="2" class="reg_select">--您的电话号码--</option>
+					<option value="3" class="reg_select">--喜欢的偶像--</option>
+					<option value="4" class="reg_select">--爱人的全拼--</option>
+				</select>
+				<span class="info error_ques">未选择问题回答！</span>
+			</p>
+			<p>
+				<label for="reg_ans">答&nbsp; &nbsp; &nbsp; &nbsp;案：</label><input id="reg_ans"  name="reg_ans" type="text">
 				<span class="info info_ans">请输入2-32位答案!</span>
 				<span class="info error_ans">回答不合法，请重新输入！</span>
 				<span class="info right_ans">可用Binggo！</span>
@@ -91,11 +95,18 @@
 					<li class="mouse"><span></span>@soho.com</li>
 				</ul>
 			</p>
-			<p><label for="reg_date">生 &nbsp; &nbsp; &nbsp; 日：</label><input id="reg_date"  name="reg_date" type="date"></p>
+			<p>
+				<label for="reg_year">生 &nbsp; &nbsp; &nbsp;
+			日：</label>
+				<select name="reg_year" id="reg_year" class="reg_date"><option value="0">-年-</option></select>
+				<select name="reg_month" id="reg_month" class="reg_date"><option value="0">-月-</option></select>
+				<select name="reg_day" id="reg_day" class="reg_date"><option value="0">-日-</option></select>
+			</p>
 			<p class="ps_p"><label class="ps_label" for="reg_ps">备 &nbsp; &nbsp; &nbsp; 注：</label><textarea id="reg_ps"  name="reg_ps"></textarea></p>
-			<p class='text_number'>还可以输入<span>200</span>字</p>
-			<input class="reg_sub input_bar mouse" type="submit" value="登录">
+			<p class='text_number text_number_1'>还可以输入<span class="number">0</span>字</p>
+			<p class='text_number text_number_2'>已超过<span class="number">0</span>字<span class='text_clear'>清尾</span></p>
 			<input class="reg_reg input_bar mouse" type="button" value="注册">
+			<input class="reg_sub input_bar mouse" type="button" value="登录">
 		</form><!-- 注册表单结束 -->
 	</header><!-- 头文件结束 -->
 	
