@@ -563,6 +563,62 @@ select::-ms-expand{ display: none;}
 	top: 0;
 	overflow: hidden;
 }
+/* banner css */
+#banner
+{
+	width: 900px;
+	height: 200px;
+	margin: 10px auto;
+	position: relative;
+}
+#banner img
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#banner .bar_bg
+{
+	width: 900px;
+	height: 30px;
+	background-color: rgba(200,200,200,.5);
+	position: absolute;
+	bottom: 0;
+}
+#banner .bar_bg span
+{
+	margin-left: 30px;
+	font-size: 16px;
+	color: #eee;
+	letter-spacing: 3px;
+
+}
+#banner .bar_bg ul
+{
+	width: 475px;
+	height: 16px;
+	padding-left: 425px;
+	position: absolute;
+	bottom: 7px;
+}
+#banner .bar_bg ul li
+{
+	width: 16px;
+	height: 16px;
+	background-color: gray;
+	float: left;
+	border-radius: 8px;
+	margin-left: 15px;
+	cursor: pointer;
+}
+#banner .bar_bg ul li:first-child
+{
+	margin-left: 0;
+}
+#banner .bar_bg .choose
+{
+	background-color: orange;
+}
 /* share-css */
 #share_box
 {

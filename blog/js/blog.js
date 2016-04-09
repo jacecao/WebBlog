@@ -181,8 +181,6 @@ $('#main .clear_bug li').hover(function(){
 		});
 });
 	
-
-
 $('#main h2').toggle(
 	function(){
 		$(this).next().animate({
@@ -194,6 +192,13 @@ $('#main h2').toggle(
 		});
 	});
 
+//bannner
+$('#banner li').hover(function(){
+	$('#banner img').hide();
+	$('#banner li').removeClass('choose');
+	$('#banner img').find( $(this).index() ).show();
+	$(this).class('choose');
+},function(){});
 
 
 

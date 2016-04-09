@@ -173,6 +173,26 @@ Elements.prototype =
 		{
 			return this.elements.length;
 		},
+	//获取某个节点的属性
+	attr:function( attr ){
+			return this.elements[0][attr];
+		},
+	//获取索引值
+	index:function(){
+			var parent = this.elements[0].parentNode,
+				childs = parent.children;
+				//children只返回HTML节点,虽然不是标准的DOM属性，
+				//但是得到了几乎所有浏览器的支持。
+				//在W3C规范中，是通过childNodes来获取子节点的，它是一个标准属性，返回指定元素的子节点的集合，
+				//包括HTML节点、文本节点、注释节点等，比children返回的节点类型更加广泛。
+			for( var i = 0; i < childs.length;i++ )
+			{
+				if( this.elements[0] == childs[i] )
+				{
+					return i;
+				}
+			}
+		},
 	//查找指定元素
 	find:function( cssSelector )
 		{
