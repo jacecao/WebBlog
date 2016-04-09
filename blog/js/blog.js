@@ -1,3 +1,56 @@
+//点击登录后显示登录框和遮罩
+var Login_show = function()
+	{
+	    $("#login").show();
+	    $("#local_screen").local( 1000 ).animate(
+	    	{
+	    		attr: 'opacity',
+	    		target: 100,
+	    		time: 30
+	    	});
+	    //拖拽登录框
+			$("#login").drag( [$("#login_h2")] );
+	    //注意元素处于不可见display:none时是无法获取自身高度、宽度的，所以这里先显示元素再获取元素尺寸
+	    var w = $("#login").offset().width,
+	    	h = $("#login").offset().height;
+	    $("#login").center( w, h ).resize(
+	    	function()
+		 	{
+		 		//在登录框居中后再执行resize()，注意这里发生拖动后登录框不再居中
+		 		//因为这里不再执行.center()
+		 		//由于local()中每执行一次那么就会让遮罩显示出来，
+		 		//所以这里需要判断一下登录框是否在显示
+		 		if( $("#login").css("display") == "block" )
+		 		{
+		 			$("#local_screen").local( 1000 );
+		 		}
+		 	}
+		);
+	};
+//点击注册后显示登录框和遮罩
+var Reg_show = function()
+	{
+		$("#reg").show();
+	    $("#local_screen").local( 1000 ).animate(
+	    	{
+	    		attr: 'opacity',
+	    		target: 100,
+	    		time: 30
+	    	});
+		$("#reg").drag( [$("#reg_h2")] );
+	    var w = $("#reg").offset().width,
+	    	h = $("#reg").offset().height;
+	    $("#reg").center( w, h ).resize(
+	    	function()
+		 	{
+		 		if( $("#reg").css("display") == "block" )
+		 		{
+		 			$("#local_screen").local( 1000 );
+		 		}
+		 	}
+		);
+	};
+
 $(function(){
 	var over = function()
 		{
@@ -19,37 +72,7 @@ $(function(){
 	//个人中心鼠标移入移出事件
 	$("#header .set_bar").hover( over,out ).class("click");
     //登录框和遮罩设置
-	//点击登录后显示登录框和遮罩
-	$("#header .login").click(
-		function()
-		{
-		    $("#login").show();
-		    $("#local_screen").local( 1000 ).animate(
-		    	{
-		    		attr: 'opacity',
-		    		target: 100,
-		    		time: 30
-		    	});
-		    //拖拽登录框
-  			$("#login").drag( [$("#login_h2")] );
-		    //注意元素处于不可见display:none时是无法获取自身高度、宽度的，所以这里先显示元素再获取元素尺寸
-		    var w = $("#login").offset().width,
-		    	h = $("#login").offset().height;
-		    $("#login").center( w, h ).resize(
-		    	function()
-			 	{
-			 		//在登录框居中后再执行resize()，注意这里发生拖动后登录框不再居中
-			 		//因为这里不再执行.center()
-			 		//由于local()中每执行一次那么就会让遮罩显示出来，
-			 		//所以这里需要判断一下登录框是否在显示
-			 		if( $("#login").css("display") == "block" )
-			 		{
-			 			$("#local_screen").local( 1000 );
-			 		}
-			 	}
-			);
-		}
-	);
+	$("#header .login").click(Login_show);
 	//隐藏登录框
 	$("#login .login_closed").click(
 		function()
@@ -64,31 +87,18 @@ $(function(){
 				}
 			});
 		}
-	);	
-	//点击注册后显示注册框和遮罩
-	$("#header .regiter").click(function(){
-	    $("#reg").show();
-	    $("#local_screen").local( 1000 ).animate(
-	    	{
-	    		attr: 'opacity',
-	    		target: 100,
-	    		time: 30
-	    	});
-		$("#reg").drag( [$("#reg_h2")] );
-	    var w = $("#reg").offset().width,
-	    	h = $("#reg").offset().height;
-	    $("#reg").center( w, h ).resize(
-	    	function()
-		 	{
-		 		if( $("#reg").css("display") == "block" )
-		 		{
-		 			$("#local_screen").local( 1000 );
-		 		}
-		 	}
-		);
+	);
+	//点击登陆框登陆按钮
+	//点击登陆框注册按钮
+	$("#login .login_reg").click(function(){
+		$("#login").hide();
+		Reg_show();
 	});
+	//点击注册后显示注册框和遮罩
+	$("#header .regiter").click(Reg_show);
 	//隐藏注册框
 	$("#reg .reg_closed").click(
+		//隐藏注册框
 		function()
 		{
 			$("#reg").hide();

@@ -216,7 +216,7 @@ a{ text-decoration: none; color: gray;}
 	width: 500px;
 	height: 610px;
 	z-index: 900;
-/* 	display: none; */
+ 	display: none; 
 }
 #login h2,#reg h2
 {
@@ -433,6 +433,21 @@ select::-ms-expand{ display: none;}
 #reg .error_check,#reg .error_ans,#reg .error_email
 {
 	letter-spacing: 0;
+}
+#reg .error_ps
+{
+	display: block;
+	width: 120px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	background-color: rgba(238,238,238,.5);
+	top: 30px;
+	position: absolute;
+	left: 130px;
+	font-size: 10px;
+	color: orange;
+	display: none;
 }
 #reg .right_user,#reg .right_pass,#reg .right_check,#reg .right_ans,#reg .right_email
 {

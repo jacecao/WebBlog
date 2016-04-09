@@ -163,9 +163,13 @@ $(window).bind('load',function(){
 	var _check_ques = function(){
 		return $('#reg').form('reg_ques').value()!= 0 ? true : false; 
 	};
-	if( _check_ques() ){
-		$('#reg .error_ques').hide();
-	}
+	$('#reg').form('reg_ques').bind('change',function(){
+		if( _check_ques() )
+		{
+			$('#reg .error_ques').hide();
+		}
+	});
+	
 	var _check_ans = function(){
 		var _len = dele_spce( $('#reg').form('reg_ans').value() ).length;
 		return _len >= 2 && _len<= 32? true:false;
@@ -346,8 +350,8 @@ $(window).bind('load',function(){
 
 	//备注
 	var check_ps = function(){
-		var _num = 200 - $('#reg').form('reg_ps').value().length;
-		if( _num <= 200 && _num >= 0 )
+		var _num = 100 - $('#reg').form('reg_ps').value().length;
+		if( _num <= 100 && _num >= 0 )
 		{
 			$('#reg .text_number_1').show();
 			$('#reg .text_number_2').hide();
@@ -366,6 +370,8 @@ $(window).bind('load',function(){
 		{
 			$('#reg .text_number_1').hide();
 		}
+	}).bind('focus',function(){
+		$('#reg .error_ps').hide();
 	});
 	//加入粘贴事件
 	$('#reg').form('reg_ps').bind('paste',function(){
@@ -377,7 +383,7 @@ $(window).bind('load',function(){
 	});
 	//清尾
 	$('#reg .text_clear').click(function(){
-		var _value = $('#reg').form('reg_ps').value().substring(0,200);
+		var _value = $('#reg').form('reg_ps').value().substring(0,100);
 		$('#reg').form('reg_ps').value( _value );
 		check_ps();
 	});
@@ -417,7 +423,7 @@ $(window).bind('load',function(){
 		}
 		if( !check_ps() )
 		{
-			$('#reg .error_email').show();
+			$('#reg .error_ps').show();
 			flag = false;
 		}
 		if( flag )
@@ -425,8 +431,11 @@ $(window).bind('load',function(){
 			$('#reg').elements[0].submit();
 		}	
 	} );
-
-
+	//登陆
+	$('#reg .reg_log').click(function(){
+		$('#reg').hide();
+		Login_show();
+	});
 
 
 
