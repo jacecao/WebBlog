@@ -285,6 +285,15 @@ Elements.prototype =
 				}
 			}
 		},
+	//兼容IE设置节点透明度
+	opacity:function( num ){
+		for( var i = 0; i < this.elements.length; i++ )
+		{
+			this.elements[i].style.opacity = num / 100;
+			this.elements[i].style.filter = 'alpha(opacity=' + num +')';
+		}
+		return this;
+	},
 	//添加CLASSNAME
 	class:function( classname )
 		{

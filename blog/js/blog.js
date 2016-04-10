@@ -69,9 +69,9 @@ $(function(){
 				}
 			});
 		};
-	//个人中心鼠标移入移出事件
+	//个人中心鼠标移入移出事件 ***************************************************
 	$("#header .set_bar").hover( over,out ).class("click");
-    //登录框和遮罩设置
+    //登录框和遮罩设置 ***************************************************
 	$("#header .login").click(Login_show);
 	//隐藏登录框
 	$("#login .login_closed").click(
@@ -88,15 +88,15 @@ $(function(){
 			});
 		}
 	);
-	//点击登陆框登陆按钮
+	//点击登陆框登陆按钮 ***************************************************
 	//点击登陆框注册按钮
 	$("#login .login_reg").click(function(){
 		$("#login").hide();
 		Reg_show();
 	});
-	//点击注册后显示注册框和遮罩
+	//点击注册后显示注册框和遮罩 ***************************************************
 	$("#header .regiter").click(Reg_show);
-	//隐藏注册框
+	//隐藏注册框 ***************************************************
 	$("#reg .reg_closed").click(
 		//隐藏注册框
 		function()
@@ -112,7 +112,7 @@ $(function(){
 			});
 		}
 	);	
-	//share分享栏控制
+	//share分享栏控制 ***************************************************
 	var share_icon_hover = function()
 	{
 		$(this).animate({
@@ -150,7 +150,7 @@ $(function(){
 		 	}
 		 }
 	);
-	//主体底部菜单栏
+	//主体底部菜单栏 ***************************************************
 	$('#main .clear_bug li').hover(function(){
 		var target = $(this).offset().left;
 		$('#main .chose_box').animate(
@@ -180,7 +180,7 @@ $(function(){
 				}
 			});
 	});
-	//主体左侧滑动菜单栏	
+	//主体左侧滑动菜单栏	***************************************************
 	$('#main h2').toggle(
 		function(){
 			$(this).next().animate({
@@ -192,16 +192,53 @@ $(function(){
 			});
 		});
 
-	//bannner 轮播广告部分
+	//bannner 轮播广告部分***************************************************
+	//轮播初始状态
+	$('#banner img').opacity(0);
+	$('#banner img').find(0).opacity(100);
+	$('#banner span').html($('#banner img').find(0).attr('alt'));
+	//轮播器样式设置
+	var banner_type = 1; //1:渐变切换 2：上下滚动切换
 	//计数器
 	var banner_index = 1;
 	//主体fun
-	var banner_run = function( obj ){
-		$('#banner img').hide();
+	var banner_run = function( obj , pref ){
+		// $('#banner img').hide();
 		$('#banner li').removeClass('choose');
-		$('#banner img').find( $(obj).index() ).show();
+		// $('#banner img').find( $(obj).index() ).show();
 		$(obj).class('choose');
 		$('#banner span').html($('#banner img').find( $(obj).index() ).attr('alt'));
+		if( banner_type == 1 )
+		{
+			//注意如果动画执行时间超过自动播放切换时间，动画就会出发失误
+			$('#banner img').find( pref ).animate({
+				attr:'opacity',
+				target: 0,
+				time: 70,
+				step:10
+			}).css('zIndex',1);
+			$('#banner img').find( $(obj).index() ).animate({
+				attr:'opacity',
+				target: 100,
+				time: 70,
+				step:10
+			}).css('zIndex',2);
+		}
+		if( banner_type == 2 )
+		{
+			$('#banner img').find( pref ).animate({
+				attr:'top',
+				target: 200,
+				time: 70,
+				step:10
+			}).opacity(100);
+			$('#banner img').find( $(obj).index() ).animate({
+				attr:'top',
+				target: 0,
+				time: 70,
+				step:10
+			}).css('top','-200px').opacity(100);
+		}
 	};
 	//计数变动fun
 	var banner_fn = function(){
@@ -210,19 +247,26 @@ $(function(){
 			banner_index = 0;
 		}
 		//理解这里的传参，要符合base.js库中$()操作
-		banner_run( $('#banner li').elements[banner_index] );
+		var pref_index = banner_index == 0 ? $('#banner li').length()-1:banner_index-1;
+		banner_run( $('#banner li').elements[banner_index], pref_index );
 		banner_index ++;
 	};
 	//自动播放部分
-	var banner_timer = setInterval( banner_fn, 1500);
+	var banner_timer = setInterval( banner_fn, 3000);
 	//手动滚动部分
 	$('#banner li').hover(function(){
 		clearInterval( banner_timer );
-		banner_run(this);
+		console.log(banner_index);
+		//避免重复加载，所以在非当前加载的情况下才执行加载
+		if( $(this).css('backgroundColor')!='rgb(255, 165, 0)' )
+		{
+			var pref_index = banner_index == 0 ? $('#banner li').length()-1:banner_index-1;
+			banner_run( this, pref_index );
+		}
 	},function(){
 		//离开鼠标后 重新计算索引和再次加入定时器
 		banner_index = $(this).index()+1;
-		banner_timer = setInterval( banner_fn, 1500);
+		banner_timer = setInterval( banner_fn, 3000);
 	});
 
 

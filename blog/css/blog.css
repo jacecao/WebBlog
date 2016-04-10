@@ -570,6 +570,7 @@ select::-ms-expand{ display: none;}
 	height: 200px;
 	margin: 10px auto;
 	position: relative;
+	overflow: hidden;
 }
 #banner img
 {
@@ -584,6 +585,7 @@ select::-ms-expand{ display: none;}
 	background-color: rgba(200,200,200,.5);
 	position: absolute;
 	bottom: 0;
+	z-index: 10;
 }
 #banner .bar_bg span
 {
