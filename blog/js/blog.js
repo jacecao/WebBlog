@@ -150,55 +150,80 @@ $(function(){
 		 	}
 		 }
 	);
-//滑动菜单栏
-$('#main .clear_bug li').hover(function(){
-	var target = $(this).offset().left;
-	$('#main .chose_box').animate(
-		{
-			attr:'left',
-			target:target+20,
-			fn:function(){
-				$('#main .main_white').animate(
-					{
-						attr:'left',
-						target:-target
-					});
-			}
-		});
-	
-},function(){
-	$('#main .chose_box').animate(
-		{
-			attr:'left',
-			target:20,
-			fn:function(){
-				$('#main .main_white').animate(
-					{
-						attr:'left',
-						target:0
-					});
-			}
-		});
-});
-	
-$('#main h2').toggle(
-	function(){
-		$(this).next().animate({
-			mix:{'height':0,'opacity':0}
-		});
+	//主体底部菜单栏
+	$('#main .clear_bug li').hover(function(){
+		var target = $(this).offset().left;
+		$('#main .chose_box').animate(
+			{
+				attr:'left',
+				target:target+20,
+				fn:function(){
+					$('#main .main_white').animate(
+						{
+							attr:'left',
+							target:-target
+						});
+				}
+			});
+		
 	},function(){
-			$(this).next().animate({
-			mix:{'height':148,'opacity':100}
-		});
+		$('#main .chose_box').animate(
+			{
+				attr:'left',
+				target:20,
+				fn:function(){
+					$('#main .main_white').animate(
+						{
+							attr:'left',
+							target:0
+						});
+				}
+			});
 	});
+	//主体左侧滑动菜单栏	
+	$('#main h2').toggle(
+		function(){
+			$(this).next().animate({
+				mix:{'height':0,'opacity':0}
+			});
+		},function(){
+				$(this).next().animate({
+				mix:{'height':148,'opacity':100}
+			});
+		});
 
-//bannner
-$('#banner li').hover(function(){
-	$('#banner img').hide();
-	$('#banner li').removeClass('choose');
-	$('#banner img').find( $(this).index() ).show();
-	$(this).class('choose');
-},function(){});
+	//bannner 轮播广告部分
+	//计数器
+	var banner_index = 1;
+	//主体fun
+	var banner_run = function( obj ){
+		$('#banner img').hide();
+		$('#banner li').removeClass('choose');
+		$('#banner img').find( $(obj).index() ).show();
+		$(obj).class('choose');
+		$('#banner span').html($('#banner img').find( $(obj).index() ).attr('alt'));
+	};
+	//计数变动fun
+	var banner_fn = function(){
+		if( banner_index >= $('#banner li').length() )
+		{
+			banner_index = 0;
+		}
+		//理解这里的传参，要符合base.js库中$()操作
+		banner_run( $('#banner li').elements[banner_index] );
+		banner_index ++;
+	};
+	//自动播放部分
+	var banner_timer = setInterval( banner_fn, 1500);
+	//手动滚动部分
+	$('#banner li').hover(function(){
+		clearInterval( banner_timer );
+		banner_run(this);
+	},function(){
+		//离开鼠标后 重新计算索引和再次加入定时器
+		banner_index = $(this).index()+1;
+		banner_timer = setInterval( banner_fn, 1500);
+	});
 
 
 
