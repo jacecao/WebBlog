@@ -457,6 +457,70 @@ select::-ms-expand{ display: none;}
 	letter-spacing: 3px;
 	display: none;
 }
+
+/* banner css ****************************************************/
+#banner
+{
+	width: 900px;
+	height: 200px;
+	margin: 20px auto;
+	position: relative;
+	overflow: hidden;
+}
+#banner img
+{
+	position: absolute;
+	width: 900px;
+	height: 200px;
+	left: 0;
+	top: 0;
+}
+#banner .bar_bg
+{
+	width: 900px;
+	height: 30px;
+	background-color: rgba(200,200,200,.5);
+	position: absolute;
+	bottom: 0;
+	z-index: 10;
+}
+#banner .bar_bg span
+{
+	margin-left: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	color: #eee;
+	letter-spacing: 3px;
+
+}
+#banner .bar_bg ul
+{
+	width: 475px;
+	height: 16px;
+	padding-left: 425px;
+	position: absolute;
+	bottom: 7px;
+}
+#banner .bar_bg ul li
+{
+	width: 16px;
+	height: 16px;
+	background-color: gray;
+	float: left;
+	border-radius: 8px;
+	margin-left: 15px;
+	cursor: pointer;
+}
+#banner .bar_bg ul li:first-child
+{
+	margin-left: 0;
+}
+#banner .bar_bg .choose
+{
+	background-color: orange;
+}
+
+
 /* main ************************************************************************/
 #main
 {
@@ -523,6 +587,7 @@ select::-ms-expand{ display: none;}
 	-webkit-transform: translateX(-50%);
 	-o-transform: translateX(-50%);
 	-ms-transform: translateX(-50%);
+	z-index: 200;
 	/*box-shadow: 0 2px 1px 2px rgba(130,130,130,.5);*/
 }
 #main .main_black,#main .main_white,#main .clear_bug
@@ -565,66 +630,7 @@ select::-ms-expand{ display: none;}
 	top: 0;
 	overflow: hidden;
 }
-/* banner css ****************************************************/
-#banner
-{
-	width: 900px;
-	height: 200px;
-	margin: 20px auto;
-	position: relative;
-	overflow: hidden;
-}
-#banner img
-{
-	position: absolute;
-	width: 900px;
-	height: 200px;
-	left: 0;
-	top: 0;
-}
-#banner .bar_bg
-{
-	width: 900px;
-	height: 30px;
-	background-color: rgba(200,200,200,.5);
-	position: absolute;
-	bottom: 0;
-	z-index: 10;
-}
-#banner .bar_bg span
-{
-	margin-left: 30px;
-	font-size: 16px;
-	color: #eee;
-	letter-spacing: 3px;
 
-}
-#banner .bar_bg ul
-{
-	width: 475px;
-	height: 16px;
-	padding-left: 425px;
-	position: absolute;
-	bottom: 7px;
-}
-#banner .bar_bg ul li
-{
-	width: 16px;
-	height: 16px;
-	background-color: gray;
-	float: left;
-	border-radius: 8px;
-	margin-left: 15px;
-	cursor: pointer;
-}
-#banner .bar_bg ul li:first-child
-{
-	margin-left: 0;
-}
-#banner .bar_bg .choose
-{
-	background-color: orange;
-}
 /* share-css **********************************************/
 #share_box
 {
