@@ -175,7 +175,7 @@ Elements.prototype =
 		},
 	//获取某个节点的属性
 	attr:function( attr ){
-			return this.elements[0][attr];
+			return this.elements[0].getAttribute(attr);
 		},
 	//获取索引值
 	index:function(){
