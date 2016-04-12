@@ -164,8 +164,7 @@ $(function(){
 							target:-target
 						});
 				}
-			});
-		
+			});	
 	},function(){
 		$('#main .chose_box').animate(
 			{
@@ -269,9 +268,33 @@ $(function(){
 		banner_timer = setInterval( banner_fn, 3000);
 	});
 
-
-
-
+	//photo延迟加载*******************************************
+	//先储存img元素，减少下面for循环的计算
+	var _imgs = $('#photo img');
+	//初始状态
+	_imgs.opacity(0);
+	//滚动事件中判定是否加载图片
+	$(window).bind('scroll',function(){
+		//防止滚动事件触发时不停的执行该函数，所以使用setTimeout()
+		//来延迟函数的执行
+		setTimeout(function(){
+			for( var i = 0; i < _imgs.length(); i++ )
+			{
+				//注意这里必须获得的是单个元素
+				//而不能是一个对象如果这里换成_imgs.find(i)就不可以了
+				var _this = _imgs.elements[i];		
+				if( View_Y + scrollTop() >= $(_this).offset().top )
+				{
+					var value = $(_this).attr('_src');
+					$(_this).attr('src',value).animate({
+						attr: 'opacity',
+						target: 100,
+						time: 200
+					});
+				}
+			}
+		},100);
+	});
 
 
 

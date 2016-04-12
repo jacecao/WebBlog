@@ -1,37 +1,5 @@
 /** 全局 **/
-//获取/设置css样式值
-var getStyle = function( obj, attr )
-	{
-		var value = null;
-		if( typeof window.getComputedStyle != "undefined")//w3c
-		{
-			_value = window.getComputedStyle( obj, null )[attr];
-		}else if( typeof obj.currentStyle != "undefined"){//IE
-			_value = obj.currentStyle[attr];
-		}
-		//判断如果样式值为长度单位的那么久转换为数值，否则就返回字符串
-		//注意这里的需要加入是负数的情况
-		if( /^[\d+|-\d+]/.test( _value ) )
-		{
-			return parseFloat( _value );
-		}else{
-			return _value;
-		}
-	};
-//获取视窗大小
-var View_X = window.innerWidth || document.documentElement.clientWidth,
-	View_Y = window.innerHeight || document.documentElement.clientHeight;
-//阻止默认事件
-var preDef = function( event )
-	{
-		var e = event || window.event;
-		if( typeof e.preventDefault != "undefined" )
-		{
-			e.preventDefault();
-		}else{
-			e.returnValue = false;
-		}
-	};
+
 /** 基础库 **/
 var $ = function( selector )
 	{
@@ -174,8 +142,18 @@ Elements.prototype =
 			return this.elements.length;
 		},
 	//获取某个节点的属性
-	attr:function( attr ){
-			return this.elements[0].getAttribute(attr);
+	attr:function( attr, value ){
+			for( var i = 0; i < this.elements.length; i++ )
+			{
+				if( arguments.length == 1 )
+				{
+					return this.elements[0].getAttribute(attr);
+				}else if( arguments.length == 2 )
+				{
+					this.elements[i].setAttribute( attr, value );
+				}
+			}
+			return this;
 		},
 	//获取索引值
 	index:function(){

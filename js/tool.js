@@ -9,6 +9,45 @@
 	( s = ua.match( /applewebkit\/[\d.]+/ ) ) ? sys.webkit = s[0]:
 	( s = ua.match( /firefox\/[\d.]+/ ) ) ? sys.firefox = s[0]: 0 ;
 })();
+
+//获取/设置css样式值
+var getStyle = function( obj, attr )
+	{
+		var value = null;
+		if( typeof window.getComputedStyle != "undefined")//w3c
+		{
+			_value = window.getComputedStyle( obj, null )[attr];
+		}else if( typeof obj.currentStyle != "undefined"){//IE
+			_value = obj.currentStyle[attr];
+		}
+		//判断如果样式值为长度单位的那么久转换为数值，否则就返回字符串
+		//注意这里的需要加入是负数的情况
+		if( /^[\d+|-\d+]/.test( _value ) )
+		{
+			return parseFloat( _value );
+		}else{
+			return _value;
+		}
+	};
+//获取视窗大小
+var View_X = window.innerWidth || document.documentElement.clientWidth,
+	View_Y = window.innerHeight || document.documentElement.clientHeight;
+//获取滚动条高度
+var scrollTop = function(){
+	return document.body.scrollTop || document.documentElement.scrollTop;
+};
+//阻止默认事件
+var preDef = function( event )
+	{
+		var e = event || window.event;
+		if( typeof e.preventDefault != "undefined" )
+		{
+			e.preventDefault();
+		}else{
+			e.returnValue = false;
+		}
+	};
+
 //DOM加载-执行函数
  function DomLoaded( fn )
  {
@@ -169,6 +208,21 @@ var setInnerText = function( ele,text )
 		ele.innerText = text;
 	}
 };
+//兼容低版本IE模式 获取某个元素到最外层顶点的位置
+var offsetTop = function( element )
+{
+	var top = element.offsetTop;
+	var parent = element.offsetParent;
+	//offsetParent属性返回一个对象(element)的引用，
+	//这个对象(element)是距离调用offsetParent的元素最近的（在包含层次中最靠近的），
+	//并且是已进行过CSS定位的容器元素。
+	while( parent != null )
+	{
+		top += parent.offsetTop;
+		parent = parent.offsetParent;
+	} 
+	return top;
+};
 //判断某个值是否在某个数组中
 var inArray = function( array,value )
 {
@@ -177,3 +231,4 @@ var inArray = function( array,value )
 		return array[i] === value ? true : false;
 	}
 };
+//获取滚动条高度
