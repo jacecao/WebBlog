@@ -369,12 +369,12 @@ Elements.prototype =
 	//元素实现视窗居中 需要传入元素的自身高度
 	center:function( width, height )
 		{
-			var top = document.documentElement.clientHeight - height,
-				left = document.documentElement.clientWidth - width;
+			var top = View_Y - height,
+				left = View_X - width;
 			for( var i = 0; i < this.elements.length; i++ )
 			{
-				this.elements[i].style.top = top/2 + "px";
-				this.elements[i].style.left = left/2 + "px";
+				this.elements[i].style.top = top/2 + scroll().top + "px";
+				this.elements[i].style.left = left/2 + scroll().left + "px";
 			}
 			return this;
 		},

@@ -1,55 +1,50 @@
-//点击登录后显示登录框和遮罩
-var Login_show = function()
-	{
-	    $("#login").show();
-	    $("#local_screen").local( 1000 ).animate(
-	    	{
-	    		attr: 'opacity',
-	    		target: 100,
-	    		time: 30
-	    	});
-	    //拖拽登录框
-			$("#login").drag( [$("#login_h2")] );
-	    //注意元素处于不可见display:none时是无法获取自身高度、宽度的，所以这里先显示元素再获取元素尺寸
-	    var w = $("#login").offset().width,
-	    	h = $("#login").offset().height;
-	    $("#login").center( w, h ).resize(
-	    	function()
-		 	{
-		 		//在登录框居中后再执行resize()，注意这里发生拖动后登录框不再居中
-		 		//因为这里不再执行.center()
-		 		//由于local()中每执行一次那么就会让遮罩显示出来，
-		 		//所以这里需要判断一下登录框是否在显示
-		 		if( $("#login").css("display") == "block" )
-		 		{
-		 			$("#local_screen").local( 1000 );
-		 		}
-		 	}
-		);
-	};
-//点击注册后显示登录框和遮罩
-var Reg_show = function()
-	{
-		$("#reg").show();
-	    $("#local_screen").local( 1000 ).animate(
-	    	{
-	    		attr: 'opacity',
-	    		target: 100,
-	    		time: 30
-	    	});
-		$("#reg").drag( [$("#reg_h2")] );
-	    var w = $("#reg").offset().width,
-	    	h = $("#reg").offset().height;
-	    $("#reg").center( w, h ).resize(
-	    	function()
-		 	{
-		 		if( $("#reg").css("display") == "block" )
-		 		{
-		 			$("#local_screen").local( 1000 );
-		 		}
-		 	}
-		);
-	};
+//显示弹出框和遮罩
+//需要传入两个参数obj:需要显示的弹出框 ele:实现拖拽的元素
+var show_fun = function( obj, ele )
+{
+    obj.show();
+    $("#local_screen").local( 1000 ).animate(
+    	{
+    		attr: 'opacity',
+    		target: 100,
+    		time: 30
+    	});
+    //拖拽登录框
+    if( arguments.length == 2 )
+    {
+		obj.drag( [ele] );
+    }
+    //注意元素处于不可见display:none时是无法获取自身高度、宽度的，所以这里先显示元素再获取元素尺寸
+    var w = obj.offset().width,
+    	h = obj.offset().height;
+    obj.center( w, h ).resize(
+    	function()
+	 	{
+	 		//在登录框居中后再执行resize()，注意这里发生拖动后登录框不再居中
+	 		//因为这里不再执行.center()
+	 		//由于local()中每执行一次那么就会让遮罩显示出来，
+	 		//所以这里需要判断一下登录框是否在显示
+	 		if( obj.css("display") == "block" )
+	 		{
+	 			$("#local_screen").local( 1000 );
+	 		}
+	 	}
+	);
+};
+//点击弹出关闭按钮后 注意如果这里直接使用closed作为变量名会出错
+//参数obj为需要关闭的弹出元素
+var closed_fun = function( obj )
+{
+	obj.hide();
+	$("#local_screen").animate({
+		attr:'opacity',
+		target:0,
+		time:30,
+		fn:function(){
+			$("#local_screen").hide();
+		}
+	});			
+};
 
 $(function(){
 	var over = function()
@@ -72,46 +67,44 @@ $(function(){
 	//个人中心鼠标移入移出事件 ***************************************************
 	$("#header .set_bar").hover( over,out ).class("click");
     //登录框和遮罩设置 ***************************************************
-	$("#header .login").click(Login_show);
+	$("#header .login").click( 
+		function()
+		{ 
+			show_fun( $('#login'), $('#login_h2') );	
+		});
 	//隐藏登录框
 	$("#login .login_closed").click(
-		function()
-		{
-			$("#login").hide();
-			$("#local_screen").animate({
-				attr:'opacity',
-				target:0,
-				time:30,
-				fn:function(){
-					$("#local_screen").hide();
-				}
-			});
-		}
+		//由于closed_fun()需要传参所以这里不能直接写closed_fun( $("#login")
+		//而需要一个匿名函数来调用该函数，否则不能执行
+		function(){ closed_fun( $("#login") ); }
 	);
-	//点击登陆框登陆按钮 ***************************************************
-	//点击登陆框注册按钮
+	//点击登陆框注册按钮 ***************************************************
+	//点击注册框登陆按钮
+	var reg_show = function()
+	{
+		show_fun( $('#reg'), $('#reg_h2') );
+		//解决注册框top值为负数的情况
+		if( $('#reg').css('top') < 0 )
+		{
+			$('#reg').css('top','10px');
+		}
+	};
 	$("#login .login_reg").click(function(){
 		$("#login").hide();
-		Reg_show();
+		reg_show();
+	});
+	$("#reg .reg_log").click(function(){
+		$("#reg").hide();
+		show_fun( $('#login'), $('#login_h2') );
 	});
 	//点击注册后显示注册框和遮罩 ***************************************************
-	$("#header .regiter").click(Reg_show);
+	$("#header .regiter").click( reg_show );
 	//隐藏注册框 ***************************************************
 	$("#reg .reg_closed").click(
 		//隐藏注册框
-		function()
-		{
-			$("#reg").hide();
-			$("#local_screen").animate({
-				attr:'opacity',
-				target:0,
-				time:30,
-				fn:function(){
-					$("#local_screen").hide();
-				}
-			});
-		}
-	);	
+		function(){ closed_fun( $('#reg') );}
+	);
+
 	//share分享栏控制 ***************************************************
 	var share_icon_hover = function()
 	{
@@ -255,7 +248,6 @@ $(function(){
 	//手动滚动部分
 	$('#banner li').hover(function(){
 		clearInterval( banner_timer );
-		console.log(banner_index);
 		//避免重复加载，所以在非当前加载的情况下才执行加载
 		if( $(this).css('backgroundColor')!='rgb(255, 165, 0)' )
 		{
@@ -270,31 +262,55 @@ $(function(){
 
 	//photo延迟加载*******************************************
 	//先储存img元素，减少下面for循环的计算
-	var _imgs = $('#photo img');
+	var _imgs = $('#photo dt img');
 	//初始状态
 	_imgs.opacity(0);
-	//滚动事件中判定是否加载图片
-	$(window).bind('scroll',function(){
-		//防止滚动事件触发时不停的执行该函数，所以使用setTimeout()
-		//来延迟函数的执行
-		setTimeout(function(){
-			for( var i = 0; i < _imgs.length(); i++ )
+	//延迟加载函数
+	var _wait_load = function()
+	{
+		for( var i = 0; i < _imgs.length(); i++ )
+		{
+			//注意这里必须获得的是单个元素
+			//而不能是一个对象如果这里换成_imgs.find(i)就不可以了
+			var _this = _imgs.elements[i];		
+			if( View_Y + scroll().top >= $(_this).offset().top )
 			{
-				//注意这里必须获得的是单个元素
-				//而不能是一个对象如果这里换成_imgs.find(i)就不可以了
-				var _this = _imgs.elements[i];		
-				if( View_Y + scrollTop() >= $(_this).offset().top )
-				{
-					var value = $(_this).attr('_src');
-					$(_this).attr('src',value).animate({
-						attr: 'opacity',
-						target: 100,
-						time: 200
-					});
-				}
+				var value = $(_this).attr('_src');
+				$(_this).attr('src',value).animate({
+					attr: 'opacity',
+					target: 100,
+					time: 120
+				});
 			}
-		},100);
-	});
+		}
+	};
+	//滚动事件中判定是否加载图片
+	//防止滚动事件触发时不停的执行该函数，所以使用setTimeout()
+	//来延迟函数的执行
+	$(window).bind( 'scroll', function(){setTimeout(_wait_load,100);} );
+	//在窗口发生变化时也要执行缓存加载函数
+	$(window).bind('resize',_wait_load);
+	// 点击图片显示大图*****************************************************
+	_imgs.click( 
+	function()
+	{ 
+		show_fun( $('#show_img'), $('#show_img_h2') ); 
+		//阻止鼠标默认的拖动选择文字事件
+		addEvent(document,'mousedown',preDef);
+		addEvent(document,'mouseup',preDef);
+		addEvent(document,'selectstart',preDef);
+	} );
+	//关闭大图
+	$('#show_img .show_img_closed').click( 
+	function()
+	{ 
+		closed_fun( $('#show_img') );
+		//在关闭遮罩时需要移除阻止函数
+		removeEvent(document,'mousedown',preDef);
+		removeEvent(document,'mouseup',preDef);
+		removeEvent(document,'selectstart',preDef);
+
+	} );
 
 
 

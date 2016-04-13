@@ -33,8 +33,12 @@ var getStyle = function( obj, attr )
 var View_X = window.innerWidth || document.documentElement.clientWidth,
 	View_Y = window.innerHeight || document.documentElement.clientHeight;
 //获取滚动条高度
-var scrollTop = function(){
-	return document.body.scrollTop || document.documentElement.scrollTop;
+var scroll = function()
+{
+	var scroll = {};
+	scroll.top = document.body.scrollTop || document.documentElement.scrollTop;
+	scroll.left = document.body.scrollLeft || document.documentElement.scrollLeft;
+	return scroll;
 };
 //阻止默认事件
 var preDef = function( event )

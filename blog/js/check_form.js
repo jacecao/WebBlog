@@ -431,11 +431,7 @@ $(window).bind('load',function(){
 			$('#reg').elements[0].submit();
 		}	
 	} );
-	//登陆
-	$('#reg .reg_log').click(function(){
-		$('#reg').hide();
-		Login_show();
-	});
+
 
 
 

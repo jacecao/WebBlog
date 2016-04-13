@@ -17,8 +17,9 @@ $().extend( "drag", function( arry ){
 			{
 				var _this_left = e.clientX - box_x,
 					_this_top = e.clientY - box_y;
-				var _max_left = View_X - _this.offsetWidth,
-					_max_top = View_Y - _this.offsetHeight;
+				//这里需要考虑滚动条的影响，所以加入滚动条的高度scroll().top和宽度值scroll().left
+				var _max_left = View_X + scroll().left - _this.offsetWidth,
+					_max_top = View_Y + scroll().top - _this.offsetHeight;
 				if( _this_left > _max_left )
 				{
 					_this_left = _max_left - 15;
@@ -34,6 +35,10 @@ $().extend( "drag", function( arry ){
 				if( _this_top <= 0 )
 				{
 					_this_top = 10;
+				}
+				if( _this_top <= scroll().top )
+				{
+					_this_top = scroll().top + 10;
 				}
 				_this.style.left = _this_left + "px";
 				_this.style.top = _this_top + "px";

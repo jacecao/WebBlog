@@ -66,13 +66,13 @@ a{ text-decoration: none; color: gray;}
 	opacity: 0;
 	/*width: 900px;
 	height: 900px;*/
-	background-color: rgba(100,100,100,.5);
+	background-color: rgba(100,100,100,.7);
 	z-index: 800;
 }
 
 
 
-/* header css */
+/* header css ****************************************************/
 #header
 {
 	min-width: 1000px;
@@ -189,8 +189,8 @@ a{ text-decoration: none; color: gray;}
 {
 	margin-left: 10px;
 }
-/* 登录框 注册框 *************************************************/
-#login,#reg
+/*所有 登录框 注册框 弹出框 css*************************************************/
+#login,#reg,#show_img
 {	
 	background-color: #eaeaea ;
 	font-size: 16px;
@@ -205,22 +205,25 @@ a{ text-decoration: none; color: gray;}
 	-o-border-radius: 5px;
 	text-align: center;
 	position: absolute;
+	display: none;
+	z-index: 900;
 }
 #login
 {
-	display: none;
 	width: 298px;
 	height: 208px;
-	z-index: 1000;
 }
 #reg
 {
 	width: 500px;
 	height: 610px;
-	z-index: 900;
- 	display: none; 
 }
-#login h2,#reg h2
+#show_img
+{
+	width: 600px;
+	height: 550px;
+}
+#login h2,#reg h2,#show_img_h2
 {
 	height: 38px;
 	line-height: 40px;
@@ -230,9 +233,23 @@ a{ text-decoration: none; color: gray;}
 	padding: 0;
 	border-bottom: 2px solid rgba(200,200,200,.4);
 	position: relative;
+}
+#show_img_h2
+{
+	font-size: 16px;
+	letter-spacing: 5px;
+}
+#show_img .show_img_img
+{
+	width:590px;
+	height: 500px;
+	margin-top: 5px;
+}
+#login h2,#reg h2,#show_img_h2
+{
 	cursor: move;
 }
-#login h2 img,#reg h2 img
+#login h2 img,#reg h2 img,#show_img h2 img
 {
 	position: absolute;
 	right: -10px;
@@ -574,7 +591,7 @@ select::-ms-expand{ display: none;}
 	background-color: #eee;
 	float: right;
 }
-/* main_nav ***************************/
+/* main_nav ***************************************************/
 #main .main_nav
 {
 	width: 465px;
@@ -631,7 +648,7 @@ select::-ms-expand{ display: none;}
 	top: 0;
 	overflow: hidden;
 }
-/* photo ***************************/
+/* photo **************************************************************/
 #photo
 {
 	margin: 0 auto;
@@ -649,6 +666,10 @@ select::-ms-expand{ display: none;}
 	height: 250px;
 	background-color: #eee;
 	margin: 0 auto;
+}
+#photo dl dt img
+{
+	cursor: pointer;
 }
 #photo dl dd
 {
