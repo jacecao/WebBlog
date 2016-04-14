@@ -471,9 +471,8 @@ Elements.prototype =
 	//让遮罩元素锁定屏幕  mainbox数值参数是如果页面有最小限制，那么遮罩最小宽度应该与页面宽度一样而不是与视窗宽度一样
 	local:function( minWidth )
 		{
-			var vw = window.innerWidth || document.documentElement.clientWidth,
-				vh = window.innerHeight || document.documentElement.clientHeight;
-
+			var vw = View_X,
+				vh = View_Y;
 			if( !!minWidth && vw < minWidth )
 			{
 				vw = minWidth;//这里的minWidth参数是指页面的最小宽度，当视窗小于页面大小时遮罩的大小就应该和最小页面相等
@@ -484,9 +483,10 @@ Elements.prototype =
 			if( vh < document.body.offsetHeight )
 			{
 				//document.body.offsetHeight 并不表示一个页面的完整高度，尤其是存在margin属性时
-				//所以当有滚动条时取document.body.scrollHeight，这个值最完全。
-				vh = document.body.scrollHeight || document.body.offsetHeight;
-			}	
+				//所以document.documentElement.offsetHeight，这个值最完全。
+				//vh = document.documentElement.offsetHeight<scroll().height?scroll().height:document.documentElement.offsetHeight;
+				vh = scroll().height;
+			}
 			for( var i = 0; i < this.elements.length; i++ )
 			{
 				this.elements[i].style.width = vw + "px";

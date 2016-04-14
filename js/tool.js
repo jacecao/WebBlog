@@ -38,6 +38,7 @@ var scroll = function()
 	var scroll = {};
 	scroll.top = document.body.scrollTop || document.documentElement.scrollTop;
 	scroll.left = document.body.scrollLeft || document.documentElement.scrollLeft;
+	scroll.height = document.body.scrollHeight || document.documentElement.scrollHeight;
 	return scroll;
 };
 //阻止默认事件

@@ -234,6 +234,7 @@ a{ text-decoration: none; color: gray;}
 	border-bottom: 2px solid rgba(200,200,200,.4);
 	position: relative;
 }
+/*************show_img*******************************/
 #show_img_h2
 {
 	font-size: 16px;
@@ -252,6 +253,30 @@ a{ text-decoration: none; color: gray;}
 	top: 240px;
 	left: 200px;
 }
+#show_img strong
+{
+	display: block;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	background-color: #000;
+	font-size: 60px;
+	color: #fff;
+	cursor: pointer;
+	position: absolute;
+	opacity: 0.4;
+}
+#show_img .sl
+{
+	top: 250px;
+}
+#show_img .sr
+{
+	top: 250px;
+	right: 0;
+}
+/************* login reg *******************************/
 #login h2,#reg h2,#show_img_h2
 {
 	cursor: move;
