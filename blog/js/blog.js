@@ -83,11 +83,6 @@ $(function(){
 	var reg_show = function()
 	{
 		show_fun( $('#reg'), $('#reg_h2') );
-		//解决注册框top值为负数的情况
-		if( $('#reg').css('top') < 0 )
-		{
-			$('#reg').css('top','10px');
-		}
 	};
 	$("#login .login_reg").click(function(){
 		$("#login").hide();
@@ -289,17 +284,50 @@ $(function(){
 	//来延迟函数的执行
 	$(window).bind( 'scroll', function(){setTimeout(_wait_load,100);} );
 	//在窗口发生变化时也要执行缓存加载函数
-	$(window).bind('resize',_wait_load);
+	$(window).resize( _wait_load );
 	// 点击图片显示大图*****************************************************
-	_imgs.click( 
-	function()
+	var _show_big_img = function()
 	{ 
 		show_fun( $('#show_img'), $('#show_img_h2') ); 
 		//阻止鼠标默认的拖动选择文字事件
 		addEvent(document,'mousedown',preDef);
 		addEvent(document,'mouseup',preDef);
 		addEvent(document,'selectstart',preDef);
-	} );
+	};
+	_imgs.click( 
+		function()
+		{
+			_show_big_img(); 
+			//预加载放法一**********************************图片预加载***************************
+			// var _temp_img = new Image();
+			// _temp_img.src = 'http://p18.qhimg.com/t014811f86312fad868.jpg';
+			// $(_temp_img).bind('load',function(){
+			// 	$('#show_img .show_loading').hide();
+			// 	$('#show_img .show_img_img').show().attr('src',_temp_img.src).opacity(0).animate({
+			// 		attr:'opacity',
+			// 		target: 100,
+			// 		time: 150
+			// 	});
+			// });
+			//预加载放法二*****
+			// var _src_url = 'http://p18.qhimg.com/t014811f86312fad868.jpg';
+			var _src_url = $(this).attr('_big_src');
+			$('#show_img .show_img_img').attr('src', _src_url);
+			$('#show_img .show_img_img').bind('load',function(){
+				$('#show_img .show_loading').hide();
+				$(this).show().opacity(0).animate({
+					attr:'opacity',
+					target: 100,
+					time: 150
+				});
+			});
+			//*****************************预加载上一张和下一张****************************
+			var children = this.parentNode.parentNode;
+			console.log( $('#photo dl').length() );
+			console.log( $(children).index() );
+			// console.log( prevIndex( $('#photo dl').index(),children ) );
+
+		});
 	//关闭大图
 	$('#show_img .show_img_closed').click( 
 	function()
@@ -308,11 +336,9 @@ $(function(){
 		//在关闭遮罩时需要移除阻止函数
 		removeEvent(document,'mousedown',preDef);
 		removeEvent(document,'mouseup',preDef);
-		removeEvent(document,'selectstart',preDef);
-
+		removeEvent(document,'selectstart',preDef);	
 	} );
-
-
+	
 
 
 

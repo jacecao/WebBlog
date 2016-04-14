@@ -7,6 +7,7 @@
 	<script src="../js/tool.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="../js/base.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="../js/base_drag.js" type="text/javascript" charset="UTF-8"></script>
+	<link rel="stylesheet" href="../css/base.css" />
 	<link rel="stylesheet" href="css/blog.css" />
 
 </head>
@@ -193,44 +194,53 @@
 			<h2 id="show_img_h2" class="show_img_h2">图片预加载
 				<img class="rotate show_img_closed" src="images/closed_btn.png" />
 			</h2>
-			<img class="show_img_img" src="" alt="test">
+			<img class="show_img_img" src=" " alt="test">
+			<div class="loading show_loading">
+		        <span></span>
+		        <span></span>
+		        <span></span>
+		        <span></span>
+		        <span></span>
+			</div>
 		</div><!-- 显示大图结束 -->
-		<dl>
-			<dt><img class="test" _src="images/photo/photo_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
-		<dl>
-			<dt><img _src="images/photo/photo_1.jpg" src="images/photo/photo_load.jpg" alt="1" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
-		<dl>
-			<dt><img _src="images/photo/photo_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
-		<dl>
-			<dt><img _src="images/photo/photo_1.jpg" src="images/photo/photo_load.jpg" alt="1" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
-		<dl>
-			<dt><img _src="images/photo/photo_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
-		<dl>
-			<dt><img _src="images/photo/photo_1.jpg" src="images/photo/photo_load.jpg" alt="1" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
-		<dl>
-			<dt><img _src="images/photo/photo_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
-		<dl>
-			<dt><img _src="images/photo/photo_1.jpg" src="images/photo/photo_load.jpg" alt="1" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
-		<dl>
-			<dt><img _src="images/photo/photo_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
-			<dd>延迟加载图片</dd>
-		</dl>
+		<div class="img_box">
+			<dl>
+				<dt><img _src="images/photo/photo_2.jpg" _big_src="images/photo/b_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+			<dl>
+				<dt><img _src="images/photo/photo_1.jpg" _big_src="images/photo/b_1.jpg" src="images/photo/photo_load.jpg" alt="1" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+			<dl>
+				<dt><img _src="images/photo/photo_2.jpg" _big_src="images/photo/b_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+			<dl>
+				<dt><img _src="images/photo/photo_1.jpg" _big_src="images/photo/b_1.jpg" src="images/photo/photo_load.jpg" alt="1" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+			<dl>
+				<dt><img _src="images/photo/photo_2.jpg" _big_src="images/photo/b_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+			<dl>
+				<dt><img _src="images/photo/photo_1.jpg" _big_src="images/photo/b_1.jpg" src="images/photo/photo_load.jpg" alt="1" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+			<dl>
+				<dt><img _src="images/photo/photo_2.jpg" _big_src="images/photo/b_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+			<dl>
+				<dt><img _src="images/photo/photo_1.jpg" _big_src="images/photo/b_1.jpg" src="images/photo/photo_load.jpg" alt="1" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+			<dl>
+				<dt><img _src="images/photo/photo_2.jpg" _big_src="images/photo/b_2.jpg" src="images/photo/photo_load.jpg" alt="2" /></dt>
+				<dd>延迟加载图片</dd>
+			</dl>
+		</div>	
 	</section><!-- 图片展示结束 -->
 
 	

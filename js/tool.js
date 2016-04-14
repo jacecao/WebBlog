@@ -235,4 +235,14 @@ var inArray = function( array,value )
 		return array[i] === value ? true : false;
 	}
 };
-//获取滚动条高度
+//获取某个节点的上一个节点的索引
+//current : 当前索引  sum_length: 元素总长度
+var prevIndex = function( current, sum_length )
+{
+	return current == 0 ? sum_length - 1 : current - 1;
+};
+//获取某个节点的下一个节点的索引
+var nextIndex = function( current, sum_length )
+{
+	return current == sum_length - 1 ? 0 : current + 1;
+};

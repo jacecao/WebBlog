@@ -156,6 +156,7 @@ Elements.prototype =
 			return this;
 		},
 	//获取索引值
+	//注意使用obj.index()，obj必须是“一个”明确指定的元素
 	index:function(){
 			var parent = this.elements[0].parentNode,
 				childs = parent.children;
@@ -443,14 +444,25 @@ Elements.prototype =
 					//在窗口发生变化后重置View_X View_Y的值
 					View_X = window.innerWidth || document.documentElement.clientWidth;
 					View_Y = window.innerHeight || document.documentElement.clientHeight;
-					fn();
-					if( element.offsetLeft > View_X - element.offsetWidth )
+					if( arguments.length == 1 )
 					{
-						element.style.left = View_X - element.offsetWidth - 10 + "px";
+						fn();
 					}
-					if( element.offsetTop > View_Y - element.offsetHeight )
+					if( element.offsetLeft > View_X + scroll().left - element.offsetWidth )
 					{
-						element.style.top = View_Y - element.offsetHeight - 10 + "px";
+						element.style.left = View_X + scroll().left - element.offsetWidth - 10 + "px";
+					}
+					if( element.offsetTop > View_Y + scroll().top - element.offsetHeight )
+					{
+						element.style.top = View_Y + scroll().top - element.offsetHeight - 10 + "px";
+					}
+					if( element.offsetTop <= 0 + scroll().top )
+					{
+						element.style.top = scroll().top + 15 + "px";
+					}
+					if( element.offsetLeft <= 0 + scroll().left )
+					{
+						element.style.left = scroll().left + "px";
 					}
 				});
 			}

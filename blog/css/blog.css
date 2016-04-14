@@ -243,7 +243,14 @@ a{ text-decoration: none; color: gray;}
 {
 	width:590px;
 	height: 500px;
-	margin-top: 5px;
+	margin: 5px auto auto auto ;
+	display: none;
+}
+#show_img .show_loading
+{
+	position: absolute;
+	top: 240px;
+	left: 200px;
 }
 #login h2,#reg h2,#show_img_h2
 {
