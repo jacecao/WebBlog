@@ -374,7 +374,17 @@ Elements.prototype =
 				left = View_X - width;
 			for( var i = 0; i < this.elements.length; i++ )
 			{
-				this.elements[i].style.top = top/2 + scroll().top + "px";
+				var _height = document.documentElement.offsetHeight;
+				//这里判断在浮动元素居中后如果整体高度大于页面自身高度，
+				//top值就必须给予调整，防止遮罩出现BUG
+				if( top/2 + scroll().top + height > _height )
+				{
+				 	//_cut值是计算出当前居中元素超出页面边界
+				 	var _cut = Math.ceil( top/2 + scroll().top + height - _height );
+				 	this.elements[i].style.top = top/2 + scroll().top - _cut + "px";
+				}else{
+				 	this.elements[i].style.top = top/2 + scroll().top + "px";
+				}
 				this.elements[i].style.left = left/2 + scroll().left + "px";
 			}
 			return this;
@@ -485,7 +495,8 @@ Elements.prototype =
 				//document.body.offsetHeight 并不表示一个页面的完整高度，尤其是存在margin属性时
 				//所以document.documentElement.offsetHeight，这个值最完全。
 				//vh = document.documentElement.offsetHeight<scroll().height?scroll().height:document.documentElement.offsetHeight;
-				vh = scroll().height;
+				//这里有一个BUG需要修复，在浏览大图时遮罩会出现不能全部覆盖的情况
+				vh = scroll().height||document.documentElement.offsetHeight;
 			}
 			for( var i = 0; i < this.elements.length; i++ )
 			{

@@ -327,11 +327,9 @@ $(function(){
 			var next = nextIndex( $(children).index(),$('#photo dl').length() );
 			//创建临时图片加载
 			var prev_img = new Image();
-			// var add = _imgs.find( prev ).attr('_big_src');
 			// prev_img.src = _imgs.find( prev ).attr('_big_src');
 			var next_img = new Image();
 			// next_img.src = _imgs.find( next ).attr('_big_src');
-			console.log( prev ,next );
 		});
 	//关闭大图
 	$('#show_img .show_img_closed').click( 
