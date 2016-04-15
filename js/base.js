@@ -178,40 +178,61 @@ Elements.prototype =
 			var _findElements = [];
 			if( typeof cssSelector == 'number' )
 			{
-				_findElements.push( this.elements[cssSelector] );
-				this.elements = _findElements;
-				return this;
-			}
-			for( var i = 0; i < this.elements.length; i++ )
-			{
-				switch( cssSelector.charAt(0) )
+				//这段代码回出现错误，原因是直接改变了this.elements的数组
+				//在同一对象下多次使用find()就会出现错误
+				// _findElements.push( this.elements[cssSelector] );
+				// this.elements = _findElements;//这部分代码在执行中会有冲突
+				//解决办法就是在对象内部储存一个变量值来储存该对象初始的this.elements数据
+				if( !this._tempEle )
 				{
-					case "#":
-						_findElements.push( this.getId( cssSelector.substring(1) ) );
-						break; 
-					case ".":
-						/*
-						**var tagArr = this.elements[i].getElementsByTagName("*");
-						**for( var j = 0; ij < tagArr.length; j++ )
-						**{
-						**	if( tagArr[j].className == cssSelector.substring(1) )
-						**	{
-						**		_findElements.push( tagArr[i] );
-						**	}
-						**}
-						*/
-						var temp = this.getClass( cssSelector.substring(1), this.elements[i] );
-						for( var j = 0; j < temp.length; j++ )
-						{
-							_findElements.push( temp[j] );
-						}
-						break;
-					default:
-						var tags = this.getTagName( cssSelector, this.elements[i] );
-						for( var j = 0; j < tags.length; j++ )
-						{
-							_findElements.push( tags[i] );
-						}		
+					this._tempEle = [];
+					for( var i = 0; i < this.elements.length; i++ )
+					{
+						this._tempEle[i]=this.elements[i];
+					}
+					_findElements.push( this.elements[cssSelector] );
+					this.elements = _findElements;
+				}else{
+					for( var i = 0; i < this._tempEle.length; i++ )
+					{
+						this.elements[i] = this._tempEle[i];
+					}
+					_findElements.push( this.elements[cssSelector] );
+					this.elements = _findElements;
+				}
+				return this;
+			}else{
+				for( var i = 0; i < this.elements.length; i++ )
+				{
+					switch( cssSelector.charAt(0) )
+					{
+						case "#":
+							_findElements.push( this.getId( cssSelector.substring(1) ) );
+							break; 
+						case ".":
+							/*
+							**var tagArr = this.elements[i].getElementsByTagName("*");
+							**for( var j = 0; ij < tagArr.length; j++ )
+							**{
+							**	if( tagArr[j].className == cssSelector.substring(1) )
+							**	{
+							**		_findElements.push( tagArr[i] );
+							**	}
+							**}
+							*/
+							var temp = this.getClass( cssSelector.substring(1), this.elements[i] );
+							for( var j = 0; j < temp.length; j++ )
+							{
+								_findElements.push( temp[j] );
+							}
+							break;
+						default:
+							var tags = this.getTagName( cssSelector, this.elements[i] );
+							for( var j = 0; j < tags.length; j++ )
+							{
+								_findElements.push( tags[i] );
+							}		
+					}
 				}
 			}
 			this.elements = _findElements;
@@ -372,6 +393,10 @@ Elements.prototype =
 		{
 			var top = View_Y - height,
 				left = View_X - width;
+			if( top <= 0 )
+			{
+				top = 40;
+			}	
 			for( var i = 0; i < this.elements.length; i++ )
 			{
 				var _height = document.documentElement.offsetHeight;

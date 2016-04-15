@@ -321,16 +321,55 @@ $(function(){
 					time: 150
 				});
 			});
+			//********************************显示 控制上下张 按钮*******************************************
+			var _hover = function( obj ,target )
+			{
+				obj.animate({
+					attr: 'opacity',
+					target: target,
+					time: 50
+				});
+			};
+			$('#show_img .show_left').hover(
+				function(){_hover($('#show_img .sl'),40);},
+				function(){_hover($('#show_img .sl'),0);}
+				);
+			$('#show_img .show_right').hover(
+				function(){_hover($('#show_img .sr'),40);},
+				function(){_hover($('#show_img .sr'),0);}
+				);
 			//*****************************预加载上一张和下一张****************************
 			var children = this.parentNode.parentNode;
 			var prev = prevIndex( $(children).index(),$('#photo dl').length() );
 			var next = nextIndex( $(children).index(),$('#photo dl').length() );
+			var prev_e = _imgs.find( prev ).elements[0];
+			var next_e = _imgs.elements.length;
+			console.log(prev,next);
+			console.log(_imgs.find( prev ).elements[0],_imgs.find( next ).elements[0]);
+			// console.log(prev_e,next_e);
 			//创建临时图片加载
-			var prev_img = new Image();
+			// var prev_img = new Image();
+			// var next_img = new Image();
 			// prev_img.src = _imgs.find( prev ).attr('_big_src');
-			var next_img = new Image();
 			// next_img.src = _imgs.find( next ).attr('_big_src');
+			// var prev_src = _imgs.find( prev ).attr('_big_src'),
+			// 	next_src = _imgs.find( next ).attr('_big_src');	
+			// var up = _imgs.find( prev ).attr('_big_src');
+			// $('#show_img .show_left').attr('src',up);
+			// var down = _imgs.find( next ).attr('_big_src');
+			// $('#show_img .show_right').attr('src',down);
+			//为左右 按钮添加一个 src 属性用于存放上一张和下一张图片的地址
+			
+			
+		
+
+
+
+
+
+
 		});
+
 	//关闭大图
 	$('#show_img .show_img_closed').click( 
 	function()
@@ -342,6 +381,30 @@ $(function(){
 		removeEvent(document,'selectstart',preDef);	
 	} );
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

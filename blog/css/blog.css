@@ -265,7 +265,7 @@ a{ text-decoration: none; color: gray;}
 	color: #fff;
 	cursor: pointer;
 	position: absolute;
-	opacity: 0.4;
+	opacity: 0;
 }
 #show_img .sl
 {
@@ -274,6 +274,24 @@ a{ text-decoration: none; color: gray;}
 #show_img .sr
 {
 	top: 250px;
+	right: 0;
+}
+#show_img .show_bar
+{
+	height: 500px;
+	width: 100px;
+	position: absolute;
+	top: 45px;
+	background-color: #eee;
+	opacity: 0;
+	cursor: pointer;
+}
+#show_img .show_left
+{
+	left: 0;
+}
+#show_img .show_right
+{
 	right: 0;
 }
 /************* login reg *******************************/
