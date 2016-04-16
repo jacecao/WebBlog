@@ -342,24 +342,37 @@ $(function(){
 			var children = this.parentNode.parentNode;
 			var prev = prevIndex( $(children).index(),$('#photo dl').length() );
 			var next = nextIndex( $(children).index(),$('#photo dl').length() );
-			var prev_e = _imgs.find( prev ).elements[0];
-			var next_e = _imgs.elements.length;
-			console.log(prev,next);
-			console.log(_imgs.find( prev ).elements[0],_imgs.find( next ).elements[0]);
+			// console.log(_imgs.find( prev ).elements[0],_imgs.find( next ).elements[0]);
 			// console.log(prev_e,next_e);
 			//创建临时图片加载
 			// var prev_img = new Image();
 			// var next_img = new Image();
 			// prev_img.src = _imgs.find( prev ).attr('_big_src');
-			// next_img.src = _imgs.find( next ).attr('_big_src');
-			// var prev_src = _imgs.find( prev ).attr('_big_src'),
-			// 	next_src = _imgs.find( next ).attr('_big_src');	
-			// var up = _imgs.find( prev ).attr('_big_src');
-			// $('#show_img .show_left').attr('src',up);
-			// var down = _imgs.find( next ).attr('_big_src');
-			// $('#show_img .show_right').attr('src',down);
-			//为左右 按钮添加一个 src 属性用于存放上一张和下一张图片的地址
-			
+			// next_img.src = _imgs.find( next ).attr('_big_src');	
+			var up = _imgs.find( prev ).attr('_big_src');
+			$('#show_img .show_left').attr('src',up);
+			//在左右按钮元素中加入一个index属性来记录上一张和下一张的索引，很关键！！！
+			$('#show_img .show_left').attr('index',prev);
+			var down = _imgs.find( next ).attr('_big_src');
+			$('#show_img .show_right').attr('src',down);
+			$('#show_img .show_right').attr('index',next);
+			//****************为左右 按钮添加一个 src 属性用于存放上一张和下一张图片的地址**********
+			//点击左右按钮开始加载图片
+			var changeImg = function( )
+			{
+				$('#show_img .show_img_img').attr('src', $(this).attr('src'));
+				var _index = parseInt( $(this).attr('index') );//转换数据类型
+				prev = prevIndex( _index, $('#photo dl').length() );
+				next = nextIndex( _index, $('#photo dl').length() );
+				up = _imgs.find( prev ).attr('_big_src');
+				$('#show_img .show_left').attr('src',up);
+				$('#show_img .show_left').attr('index',prev);
+				down = _imgs.find( next ).attr('_big_src');
+				$('#show_img .show_right').attr('src',down);
+				$('#show_img .show_right').attr('index',next);
+			};
+			$('#show_img .show_left').click( changeImg );
+			$('#show_img .show_right').click( changeImg );
 			
 		
 

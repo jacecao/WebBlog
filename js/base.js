@@ -156,7 +156,8 @@ Elements.prototype =
 			return this;
 		},
 	//获取索引值
-	//注意使用obj.index()，obj必须是“一个”明确指定的元素
+	//注意使用obj.index()得到的索引是参考其上一级父元素下的所有children来确定
+	//所以要明确自己obj的层次关系
 	index:function(){
 			var parent = this.elements[0].parentNode,
 				childs = parent.children;
