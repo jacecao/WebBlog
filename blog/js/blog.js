@@ -255,7 +255,7 @@ $(function(){
 		banner_timer = setInterval( banner_fn, 3000);
 	});
 
-	//photo延迟加载*******************************************
+	//*******************************************photo延迟加载********************************
 	//先储存img元素，减少下面for循环的计算
 	var _imgs = $('#photo dt img');
 	//初始状态
@@ -268,13 +268,13 @@ $(function(){
 			//注意这里必须获得的是单个元素
 			//而不能是一个对象如果这里换成_imgs.find(i)就不可以了
 			var _this = _imgs.elements[i];		
-			if( View_Y + scroll().top >= $(_this).offset().top )
+			if( View_Y + scroll().top >= $(_this).offset().top - 30 )
 			{
 				var value = $(_this).attr('_src');
 				$(_this).attr('src',value).animate({
 					attr: 'opacity',
 					target: 100,
-					time: 120
+					time: 70
 				});
 			}
 		}
@@ -285,7 +285,7 @@ $(function(){
 	$(window).bind( 'scroll', function(){setTimeout(_wait_load,100);} );
 	//在窗口发生变化时也要执行缓存加载函数
 	$(window).resize( _wait_load );
-	// 点击图片显示大图*****************************************************
+	// ************************************************* 点击图片显示大图 **************************
 	var _show_big_img = function()
 	{ 
 		show_fun( $('#show_img'), $('#show_img_h2') ); 
@@ -294,11 +294,12 @@ $(function(){
 		addEvent(document,'mouseup',preDef);
 		addEvent(document,'selectstart',preDef);
 	};
+	var children,prev,next,up,down,_index;
 	_imgs.click( 
 		function()
 		{
 			_show_big_img(); 
-			//预加载放法一**********************************图片预加载***************************
+			//预加载放法一********************************** 图片预加载 ***************************
 			// var _temp_img = new Image();
 			// _temp_img.src = 'http://p18.qhimg.com/t014811f86312fad868.jpg';
 			// $(_temp_img).bind('load',function(){
@@ -339,55 +340,53 @@ $(function(){
 				function(){_hover($('#show_img .sr'),0);}
 				);
 			//*****************************预加载上一张和下一张****************************
-			var children = this.parentNode.parentNode;
-			var prev = prevIndex( $(children).index(),$('#photo dl').length() );
-			var next = nextIndex( $(children).index(),$('#photo dl').length() );
+			children = this.parentNode.parentNode;
+			prev = prevIndex( $(children).index(),$('#photo dl').length() );
+			next = nextIndex( $(children).index(),$('#photo dl').length() );
+			$('#show_img .show_index').html( $(children).index() + 1 + '/' + $('#photo dl').length() );
 			// console.log(_imgs.find( prev ).elements[0],_imgs.find( next ).elements[0]);
 			// console.log(prev_e,next_e);
-			//创建临时图片加载
+			//创建临时图片加载，注意这里使用临时图片对象进行上一张和下一张进行预加载
 			// var prev_img = new Image();
 			// var next_img = new Image();
 			// prev_img.src = _imgs.find( prev ).attr('_big_src');
 			// next_img.src = _imgs.find( next ).attr('_big_src');	
-			var up = _imgs.find( prev ).attr('_big_src');
+			up = _imgs.find( prev ).attr('_big_src');
 			$('#show_img .show_left').attr('src',up);
 			//在左右按钮元素中加入一个index属性来记录上一张和下一张的索引，很关键！！！
 			$('#show_img .show_left').attr('index',prev);
-			var down = _imgs.find( next ).attr('_big_src');
+			down = _imgs.find( next ).attr('_big_src');
 			$('#show_img .show_right').attr('src',down);
 			$('#show_img .show_right').attr('index',next);
-			//****************为左右 按钮添加一个 src 属性用于存放上一张和下一张图片的地址**********
-			//点击左右按钮开始加载图片
-			var changeImg = function( )
-			{
-				$('#show_img .show_img_img').attr('src', $(this).attr('src'));
-				var _index = parseInt( $(this).attr('index') );//转换数据类型
-				prev = prevIndex( _index, $('#photo dl').length() );
-				next = nextIndex( _index, $('#photo dl').length() );
-				up = _imgs.find( prev ).attr('_big_src');
-				$('#show_img .show_left').attr('src',up);
-				$('#show_img .show_left').attr('index',prev);
-				down = _imgs.find( next ).attr('_big_src');
-				$('#show_img .show_right').attr('src',down);
-				$('#show_img .show_right').attr('index',next);
-			};
-			$('#show_img .show_left').click( changeImg );
-			$('#show_img .show_right').click( changeImg );
-			
-		
-
-
-
-
-
 
 		});
+	//******************************* 点击左右按钮加载图片 ********************************
+	//为左右 按钮添加一个 src 属性用于存放上一张和下一张图片的地址
+	//注意将左右加载功能放入上面_imgs.click()函数中就会出现误操作，其原因有待研究？？？？？？？？？
+	//所以这里将左右加载图片单独放在外面来执行
+	var changeImg = function( )
+	{
+		$('#show_img .show_img_img').attr('src', $(this).attr('src'));
+		_index = parseInt( $(this).attr('index') );//转换数据类型
+		$('#show_img .show_index').html( _index + 1 + '/'+ $('#photo dl').length() );
+		prev = prevIndex( _index, $('#photo dl').length() );
+		next = nextIndex( _index, $('#photo dl').length() );
+		up = _imgs.find( prev ).attr('_big_src');
+		$('#show_img .show_left').attr('src',up);
+		$('#show_img .show_left').attr('index',prev);
+		down = _imgs.find( next ).attr('_big_src');
+		$('#show_img .show_right').attr('src',down);
+		$('#show_img .show_right').attr('index',next);
+	};
+	$('#show_img .show_left').click( changeImg );
+	$('#show_img .show_right').click( changeImg );
 
 	//关闭大图
 	$('#show_img .show_img_closed').click( 
 	function()
 	{ 
 		closed_fun( $('#show_img') );
+		children = prev = next = up = down = _index = null;
 		//在关闭遮罩时需要移除阻止函数
 		removeEvent(document,'mousedown',preDef);
 		removeEvent(document,'mouseup',preDef);
