@@ -1,7 +1,7 @@
 $(window).bind('load',function(){
 	//刷新后表单重置
 	$('#reg').elements[0].reset();
-	//用户名检验
+	//*****************************用户名检验**************************
 	var _check_user = function(){
 		var getValue = dele_spce( $('#reg').form('reg_user').value() );
 		return ( /\w{2,20}/.test( getValue ) && !/\W+/.test( getValue )  )?true:false;
@@ -28,7 +28,7 @@ $(window).bind('load',function(){
 		}
 	});
 	
-	//密码检验
+	//*****************************密码检验******************************
 	//密码检验FN
 	var check_pass = function( )
 	{
@@ -159,7 +159,7 @@ $(window).bind('load',function(){
 		}
 	});
 
-	//回答验证
+	//**********************************************回答验证*****************************
 	var _check_ques = function(){
 		return $('#reg').form('reg_ques').value()!= 0 ? true : false; 
 	};
@@ -204,7 +204,7 @@ $(window).bind('load',function(){
 		}
 	});
 
-	//电子邮件验证
+	//*******************************************电子邮件验证*************************
 	var _check_email = function(){
 		var _value = dele_spce( $('#reg').form('reg_email').value() );
 		return /^\w+@\w+(\.[a-z]{2,4}){1,2}$/i.test( _value )?true:false;
@@ -292,7 +292,7 @@ $(window).bind('load',function(){
 		$('#reg').form('reg_email').value(_value);
 	});
 
-	//生日 日期注入
+	//****************************生日 日期注入********************************
 	var year = $('#reg').form('reg_year'),
 		month = $('#reg').form('reg_month'),
 		day = $('#reg').form('reg_day'),
@@ -348,7 +348,7 @@ $(window).bind('load',function(){
 	year.bind('change',select_day);
 	month.bind('change',select_day);
 
-	//备注
+	//***************************************备注***************************
 	var check_ps = function(){
 		var _num = 100 - $('#reg').form('reg_ps').value().length;
 		if( _num <= 100 && _num >= 0 )
@@ -388,7 +388,7 @@ $(window).bind('load',function(){
 		check_ps();
 	});
 
-	//提交
+	//**************************************提交*************************
 	$('#reg .reg_reg').click( function(){
 		var flag = true;
 		if( !_check_user() )

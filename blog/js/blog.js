@@ -97,9 +97,15 @@ $(function(){
 	//隐藏注册框 ***************************************************
 	$("#reg .reg_closed").click(
 		//隐藏注册框
-		function(){ closed_fun( $('#reg') );}
+		function()
+		{ 
+			//关闭后表单重置
+			$('#reg').elements[0].reset();
+			//关闭注册框强制隐藏所有提示信息
+			$('#reg .info').hide();
+			closed_fun( $('#reg') );
+		}
 	);
-
 	//share分享栏控制 ***************************************************
 	var share_icon_hover = function()
 	{
@@ -409,20 +415,7 @@ $(function(){
 	} );
 	
 	//*************************************调用ajax***********************************
-	$(document).click(function(){
-		$().ajax({
-			method:'post',
-			url:'php/demo.php',
-			data:{
-				'name':'lee',
-				'age':100
-			},
-			success: function(text){
-				alert(text);
-			},
-			async:true
-		});
-	});
+
 
 
 

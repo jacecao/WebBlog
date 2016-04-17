@@ -522,7 +522,7 @@ Elements.prototype =
 				//所以document.documentElement.offsetHeight，这个值最完全。
 				//vh = document.documentElement.offsetHeight<scroll().height?scroll().height:document.documentElement.offsetHeight;
 				//这里有一个BUG需要修复，在浏览大图时遮罩会出现不能全部覆盖的情况
-				vh = scroll().height||document.documentElement.offsetHeight;
+				vh = scroll().height + 20 ||document.documentElement.offsetHeight + 20;
 			}
 			for( var i = 0; i < this.elements.length; i++ )
 			{
