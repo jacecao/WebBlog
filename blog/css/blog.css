@@ -310,10 +310,11 @@ a{ text-decoration: none; color: gray;}
 #login h2 img,#reg h2 img,#show_img h2 img
 {
 	position: absolute;
+	width: 28px;
+	height: 28px;
 	right: -10px;
 	top: -10px;
 	cursor: pointer;
-
 }
 #login p
 {

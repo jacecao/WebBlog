@@ -362,10 +362,25 @@ $(function(){
 		});
 	//******************************* 点击左右按钮加载图片 ********************************
 	//为左右 按钮添加一个 src 属性用于存放上一张和下一张图片的地址
-	//注意将左右加载功能放入上面_imgs.click()函数中就会出现误操作，其原因有待研究？？？？？？？？？
+	//注意将左右加载功能放入上面_imgs.click()函数中就会出现误操作，其原因如下：
+	//在a.click()事件中嵌套一个click事件函数，并在a.click()函数中定义一个新的test()函数
+	//a.click( function()
+	//	{ 
+	//		var test = funtion(){}；
+	//		b.click( test ) 
+	//	});
+	//那么会出现一个情况,那就是在a.click()执行过程中会缓存test()函数执行次数
+	//及a.click()执行多少次那么test()会被要求执行多少次，但不是立马执行
+	//而是在test()函数在被触发时同时执行。
+	//如果将test()函数移除a.click()函数中，那么就不会出现这种情况；
+	//( 参考demo文件夹中 event.js代码中的示例 )
 	//所以这里将左右加载图片单独放在外面来执行
 	var changeImg = function( )
 	{
+		//图片未完成加载前显示加载动态
+		//注意在$('#show_img .show_img_img')的load()中我们已经要求，加载成功$('#show_img .show_loading').hide();
+		//所以这里我们只需要让加载动态显示即可
+		$('#show_img .show_loading').show();
 		$('#show_img .show_img_img').attr('src', $(this).attr('src'));
 		_index = parseInt( $(this).attr('index') );//转换数据类型
 		$('#show_img .show_index').html( _index + 1 + '/'+ $('#photo dl').length() );
@@ -393,8 +408,21 @@ $(function(){
 		removeEvent(document,'selectstart',preDef);	
 	} );
 	
-
-
+	//*************************************调用ajax***********************************
+	$(document).click(function(){
+		$().ajax({
+			method:'post',
+			url:'php/demo.php',
+			data:{
+				'name':'lee',
+				'age':100
+			},
+			success: function(text){
+				alert(text);
+			},
+			async:true
+		});
+	});
 
 
 

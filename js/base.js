@@ -729,5 +729,80 @@ Elements.prototype =
 	extend:function( name, fn )
 		{
 			Elements.prototype[name] = fn;
-		},	
+		},
+
+	//ajax封装
+	//obj对象属性有：
+	//.url .data .method .async (布尔值) .scuccess (数据传递成功后执行的函数)
+	ajax:function( obj )
+		{
+			var xhr = (function(){
+				if( typeof XMLHttpRequest != 'undefined' )
+				{
+					return new XMLHttpRequest();
+				}else if( typeof ActiveXObject != 'undefined' ){
+					var version = [
+						'MSXML2.XMLHttp.6.0',
+						'MSXML2.XMLHttp.3.0',
+						'MSXML2.XMLHttp'
+					];
+					for( var i = 0; version.length; i++ )
+					{
+						try{
+							return new ActiveXObject( version[i] );
+						}catch(e){
+							//继续
+						}
+					}
+				}else{
+					throw new Error('浏览器版本不支持XHR对象！');
+				}
+			})();
+			obj.url = obj.url + '?rand=' + Math.random();
+			obj.data = (function( data ){
+				var arr = [];
+				for( var i in data )
+				{
+					arr.push( encodeURIComponent(i) + '=' + encodeURIComponent(data[i]) );
+				}
+				return arr.join('&');
+			})( obj.data );
+			if( obj.method === 'get')
+			{
+				obj.url += obj.url.indexOf('?') ? '?' + obj.data : '&' + obj.data;
+			}
+			if( obj.async === true )
+			{
+				xhr.onreadystatechange = function()
+				{
+					if( xhr.readyState == 4 )
+					{
+						ajax_callback();
+					}
+				};
+			}
+			xhr.open( obj.method, obj.url, obj.async );
+			if( obj.method === 'post' )
+			{
+				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+				xhr.send(obj.data);
+			}else{
+				xhr.send(null);
+			}
+			if( obj.async === false )
+			{
+				ajax_callback();
+			}
+			function ajax_callback(){
+				if(xhr.status == 200 )
+				{
+					obj.success(xhr.responseText);
+				}else{
+					alert('获取数据错误！错误代号：'+xhr.status+'错误信息：'+xhr.statusText);
+				}
+			}
+		}
+
+
+
 };
