@@ -428,8 +428,19 @@ $(window).bind('load',function(){
 		}
 		if( flag )
 		{
-			$('#reg').elements[0].submit();
-		}	
+			// $('#reg').elements[0].submit();
+			$().ajax({
+				method:'post',
+				url:'php/demo.php',
+				data: $('#reg').find(0).serialize(),
+				success:function(text){
+					alert(text);
+				},
+				async:true
+			});
+		}
+	
+
 	} );
 
 

@@ -678,6 +678,56 @@ Elements.prototype =
 			}
 			return this;
 		},
+	//表单序列化
+	//******************表单序列化********************/
+	//表单序列化要求：
+	//1.不发送禁用字段，2.只发送勾选的复选框和单选按钮
+	//3.不发送type是reset\submit\file\button以及字段集
+	//4.多选择框中的每个选中的值单独一个条目
+	//5.对于<selec>，如果有value值，就指定value作为发送的值
+	//如果没有就指定text值。
+	//form ： 明确指定的form表单
+	serialize:function(){
+			for( var i = 0; i < this.elements.length; i++ )
+			{
+				var form = this.elements[i];
+				var parts = {};
+				for( var i = 0; i < form.elements.length; i++ )//form.elements得到所有的表单子元素(label除外)
+				{
+					var filed = form.elements[i];
+					switch( filed.type ){
+						case undefined:
+						case 'submit':
+						case 'reset':
+						case 'file':
+						case 'button':
+							break;
+						case 'radio':
+						case 'checkbox':
+							if( !filed.selected ){ break; }
+						case 'select-one': //单选
+						case 'select-multiple':	 //多选
+							for( var j = 0; j < filed.options.length; j++ )
+							{
+								var option = filed.options[j];
+								if( option.selected ){
+									var optValue = '';
+									if( option.hasAttribute ){//IE8及之前是没有该方法的，用于判断某个元素是否拥有某个属性
+										optValue = ( option.hasAttribute('value')? option.value : option.text );
+									}else{
+										//specified 查明是否已规定某个属性 返回布尔值：
+										optValue = ( option.attribute('value').specified ? option.value : option.text );
+									}
+									parts[filed.name] = optValue;
+								}
+							}
+						default:
+							parts[filed.name] = filed.value;	
+					}
+				}
+				return parts;
+			}
+		},	
 	//获取表单元素的值
 	value:function( v )
 		{

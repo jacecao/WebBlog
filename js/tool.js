@@ -228,7 +228,7 @@ var offsetTop = function( element )
 	} 
 	return top;
 };
-//判断某个值是否在某个数组中
+//判断某个值是否在某个数组中****************************
 var inArray = function( array,value )
 {
 	for( var i in array )
@@ -236,7 +236,7 @@ var inArray = function( array,value )
 		return array[i] === value ? true : false;
 	}
 };
-//获取某个节点的上一个节点的索引
+//获取某个节点的上一个节点的索引***********************
 //current : 当前索引  sum_length: 元素总长度
 var prevIndex = function( current, sum_length )
 {
@@ -247,3 +247,4 @@ var nextIndex = function( current, sum_length )
 {
 	return current == sum_length - 1 ? 0 : current + 1;
 };
+
