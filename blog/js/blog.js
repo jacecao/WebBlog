@@ -76,7 +76,11 @@ $(function(){
 	$("#login .login_closed").click(
 		//由于closed_fun()需要传参所以这里不能直接写closed_fun( $("#login")
 		//而需要一个匿名函数来调用该函数，否则不能执行
-		function(){ closed_fun( $("#login") ); }
+		function()
+		{ 
+			$('#login').elements[0].reset();
+			closed_fun( $("#login") ); 
+		}
 	);
 	//点击登陆框注册按钮 ***************************************************
 	//点击注册框登陆按钮
