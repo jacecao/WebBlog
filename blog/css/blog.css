@@ -333,9 +333,9 @@ a{ text-decoration: none; color: gray;}
 }
 #user,#pass,#reg_user,#reg_pass,#reg_check,#reg_ques,#reg_ans,#reg_email
 {
-	padding-left: 10px;
+	padding: 0 15px 0 10px;
 	height: 35px;
-	width: 153px;
+	width: 138px;
 	background: url("../images/input_bg.png") no-repeat;
 	border: none;
 	outline: none;
