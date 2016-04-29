@@ -508,7 +508,7 @@ Elements.prototype =
 	local:function( minWidth )
 		{
 			var vw = View_X + scroll().left,
-				vh = View_Y + scroll().height;
+				vh = scroll().height || View_Y;
 			if( !!minWidth && vw < minWidth )
 			{
 				vw = minWidth;//这里的minWidth参数是指页面的最小宽度，当视窗小于页面大小时遮罩的大小就应该和最小页面相等
