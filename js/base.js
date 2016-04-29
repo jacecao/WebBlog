@@ -507,23 +507,23 @@ Elements.prototype =
 	//让遮罩元素锁定屏幕  mainbox数值参数是如果页面有最小限制，那么遮罩最小宽度应该与页面宽度一样而不是与视窗宽度一样
 	local:function( minWidth )
 		{
-			var vw = View_X,
-				vh = View_Y;
+			var vw = View_X + scroll().left,
+				vh = View_Y + scroll().height;
 			if( !!minWidth && vw < minWidth )
 			{
 				vw = minWidth;//这里的minWidth参数是指页面的最小宽度，当视窗小于页面大小时遮罩的大小就应该和最小页面相等
-			}else if( vw > document.body.offsetWidth )
-			{
-				vw = document.body.offsetWidth;
 			}
-			if( vh < document.body.offsetHeight )
-			{
-				//document.body.offsetHeight 并不表示一个页面的完整高度，尤其是存在margin属性时
-				//所以document.documentElement.offsetHeight，这个值最完全。
-				//vh = document.documentElement.offsetHeight<scroll().height?scroll().height:document.documentElement.offsetHeight;
-				//这里有一个BUG需要修复，在浏览大图时遮罩会出现不能全部覆盖的情况
-				vh = scroll().height + 20 ||document.documentElement.offsetHeight + 20;
-			}
+			// }else if( vw > document.body.offsetWidth ){
+			// 	vw = document.body.offsetWidth;
+			// }
+			// if( vh < document.body.offsetHeight )
+			// {
+			// 	//document.body.offsetHeight 并不表示一个页面的完整高度，尤其是存在margin属性时
+			// 	//所以document.documentElement.offsetHeight，这个值最完全。
+			// 	//vh = document.documentElement.offsetHeight<scroll().height?scroll().height:document.documentElement.offsetHeight;
+			// 	//这里有一个BUG需要修复，在浏览大图时遮罩会出现不能全部覆盖的情况
+			// 	vh = scroll().height + 20 || document.documentElement.offsetHeight + 20;
+			// }
 			for( var i = 0; i < this.elements.length; i++ )
 			{
 				this.elements[i].style.width = vw + "px";
