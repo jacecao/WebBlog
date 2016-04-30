@@ -46,6 +46,19 @@ var closed_fun = function( obj )
 	});			
 };
 
+//隐藏注册框 ***************************************************
+var hide_reg = function(){
+	//关闭后表单重置
+	$('#reg').elements[0].reset();
+	$('#reg .reg_reg').elements[0].disabled = true;
+	$('#reg .reg_reg').removeClass('mouse').removeClass('reg_active');
+	//关闭注册框强制隐藏所有提示信息
+	$('#loading').hide();
+	$('#load_success').hide();
+	$('#reg .info').hide();
+	closed_fun( $('#reg') );
+};
+
 $(function(){
 	var over = function()
 		{
@@ -93,22 +106,14 @@ $(function(){
 		reg_show();
 	});
 	$("#reg .reg_log").click(function(){
-		$("#reg").hide();
+		hide_reg();
 		show_fun( $('#login'), $('#login_h2') );
 	});
 	//点击注册后显示注册框和遮罩 ***************************************************
 	$("#header .regiter").click( reg_show );
-	//隐藏注册框 ***************************************************
 	$("#reg .reg_closed").click(
 		//隐藏注册框
-		function()
-		{ 
-			//关闭后表单重置
-			$('#reg').elements[0].reset();
-			//关闭注册框强制隐藏所有提示信息
-			$('#reg .info').hide();
-			closed_fun( $('#reg') );
-		}
+		hide_reg
 	);
 	//share分享栏控制 ***************************************************
 	var share_icon_hover = function()

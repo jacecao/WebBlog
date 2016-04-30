@@ -512,10 +512,9 @@ Elements.prototype =
 			if( !!minWidth && vw < minWidth )
 			{
 				vw = minWidth;//这里的minWidth参数是指页面的最小宽度，当视窗小于页面大小时遮罩的大小就应该和最小页面相等
+			}else if( vw > document.body.offsetWidth ){
+				vw = document.body.offsetWidth;
 			}
-			// }else if( vw > document.body.offsetWidth ){
-			// 	vw = document.body.offsetWidth;
-			// }
 			// if( vh < document.body.offsetHeight )
 			// {
 			// 	//document.body.offsetHeight 并不表示一个页面的完整高度，尤其是存在margin属性时

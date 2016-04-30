@@ -4,7 +4,7 @@ $(window).bind('load',function(){
 	//*****************************用户名检验**************************
 	var _check_user = function(){
 		var getValue = dele_spce( $('#reg').form('reg_user').value() );
-		return ( /\w{2,20}/.test( getValue ) && !/\W+/.test( getValue )  )?true:false;
+		return ( /\w{2,20}/.test( getValue ) && !/\W+/.test( getValue ) )?true:false;
 	};
 	$('#reg').form('reg_user').bind( 'focus',function(){
 		$('#reg .info_user').show();
@@ -12,21 +12,39 @@ $(window).bind('load',function(){
 		$('#reg .right_user').hide();
 	}).bind( 'blur',function(){
 		var getValue = dele_spce( $(this).value() );
-		if( getValue  == '' )//如果值为空那么全部隐藏
-		{
+		if( getValue  == '' ){//如果值为空那么全部隐藏
 			$('#reg .info_user').hide();
 			$('#reg .error_user').hide();
 			$('#reg .right_user').hide();
-		}else if( !_check_user() ){
+		}else if( _check_user() ){
+			//********************检查用户名是否占用***********************
 			$('#reg .info_user').hide();
-			$('#reg .error_user').show();
-			$('#reg .right_user').hide();
+			$('#reg .error_user').html('用户名不合法！');
+			$('#reg .check_user').show();
+			$().ajax({
+				method:'post',
+				url:'php/check_user.php',
+				data: $('#reg').find(0).serialize(),
+				success:function(text){
+					if( text == 1 )
+					{
+						$('#reg .check_user').hide();
+						$('#reg .error_user').html('用户名已存在！');
+						$('#reg .error_user').show();
+					}else{
+						$('#reg .check_user').hide();
+						$('#reg .error_user').hide();
+						$('#reg .right_user').show();
+					}
+				},
+				async:true 
+			});
 		}else{
 			$('#reg .info_user').hide();
 			$('#reg .error_user').hide();
 			$('#reg .right_user').show();
 		}
-	});
+	});	
 	
 	//*****************************密码检验******************************
 	//密码检验FN
@@ -102,7 +120,7 @@ $(window).bind('load',function(){
 			$('#reg .info_pass .s4').html('');
 		}
 		return ( value.length >= 6 && value.length <= 20 && !/\s/.test(value) && code_length >=2 )?true:false;
-	}
+	};
 
 	$('#reg').form('reg_pass').bind( 'focus',function(){
 		$('#reg .info_pass').show();
@@ -389,52 +407,72 @@ $(window).bind('load',function(){
 	});
 
 	//**************************************提交*************************
-	$('#reg .reg_reg').click( function(){
+	//检测是否满足提交条件
+	var _check_from = function(){
 		var flag = true;
 		if( !_check_user() )
 		{
-			$('#reg .error_user').show();
+			// $('#reg .error_user').show();
 			flag = false;
 		}
 		if( !check_pass() )
 		{
-			$('#reg .error_pass').show();
+			// $('#reg .error_pass').show();
 			flag = false;
 		}
 		if( !_check_pass() )
 		{
-			$('#reg .error_check').show();
+			// $('#reg .error_check').show();
 			flag = false;
 		}
 		if( !_check_ques() )
 		{
-			$('#reg .error_ques').show();
+			// $('#reg .error_ques').show();
 			flag = false;
 		}
 		if( !_check_ans() )
 		{
-			$('#reg .error_ans').show();
+			// $('#reg .error_ans').show();
 			flag = false;
 		}
 		if( !_check_email() )
 		{
-			$('#reg .error_email').show();
+			// $('#reg .error_email').show();
 			flag = false;
 		}
 		if( !check_ps() )
 		{
-			$('#reg .error_ps').show();
+			// $('#reg .error_ps').show();
 			flag = false;
 		}
-		if( flag )
+		return flag;
+	};
+	$('#reg').bind('keyup',function(){ 
+		if( _check_from() )
 		{
-			// $('#reg').elements[0].submit();
+			$('#reg .reg_reg').elements[0].disabled = false;
+			$('#reg .reg_reg').class('mouse').class('reg_active');
+		}
+	});	
+	$('#reg .reg_reg').click( function(){
+		if( _check_from() )
+		{
+			$('#reg .reg_reg').elements[0].disabled = true;
+			$('#reg .reg_reg').removeClass('reg_active').removeClass('mouse');
+			$('#loading').show().center(200,60);
 			$().ajax({
 				method:'post',
-				url:'php/demo.php',
+				url:'php/config.php',
 				data: $('#reg').find(0).serialize(),
 				success:function(text){
-					alert(text);
+					if( text == 1 )
+					{
+						$('#loading').hide();
+						$('#load_success').show().center(160,90);
+						setTimeout(function(){
+							hide_reg();
+						},1500);
+					}
 				},
 				async:true
 			});

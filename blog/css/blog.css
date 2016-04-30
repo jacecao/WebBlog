@@ -18,7 +18,7 @@ a{ text-decoration: none; color: gray;}
 {
 	color: orange;
 }
-.mouse:hover,.keychoose
+.mouse:hover,.keychoose,.shadow
 { 
 	box-shadow: 0 0 1px 2px rgba( 240,240,240,.8) inset;
 	background-color: rgba( 250,250,250,.6) ;
@@ -302,7 +302,7 @@ a{ text-decoration: none; color: gray;}
 {
 	right: 0;
 }
-/************* login reg *******************************/
+/************************************ login reg *******************************/
 #login h2,#reg h2,#show_img_h2
 {
 	cursor: move;
@@ -326,6 +326,10 @@ a{ text-decoration: none; color: gray;}
 	margin-left: 20px;
 	width: 250px;
 	position: relative;
+}
+#reg .reg_active /* 注册按钮被激活 */
+{
+	color: orange;
 }
 #reg .ps_p
 {
@@ -379,6 +383,10 @@ select::-ms-expand{ display: none;}
 {
 	margin-left: 10px;
 }
+#login .login_reg, #login .login_sub,#reg .reg_reg,#reg .reg_log
+{
+	outline: none;
+}
 #reg_ps
 {
 	width: 200px;
@@ -407,7 +415,7 @@ select::-ms-expand{ display: none;}
 	font-weight: bold;
 	margin-left: 10px;
 }
-/* 提示信息 */
+/************************ 表单提示信息 *******************************/
 #reg .info
 {
 	display: block;
@@ -429,6 +437,11 @@ select::-ms-expand{ display: none;}
 	line-height: 23px;
 	top: -15px;
 	left: 240px;
+	display: none;
+}
+#reg .check_user
+{
+	color: orange;
 	display: none;
 }
 #reg .info_pass
@@ -534,7 +547,45 @@ select::-ms-expand{ display: none;}
 	letter-spacing: 3px;
 	display: none;
 }
-
+/************************ 数据加载提示信息 *******************************/
+#loading,#load_success
+{
+	position: absolute;
+	display: none;
+	text-align: center;
+	z-index: 1100;
+}
+#loading
+{
+	width: 200px;
+	height: 60px;
+}
+#loading .loading
+{
+	margin-top: 10px;
+}
+#loading .load_info
+{
+	display: block;
+	margin-top: 10px;
+	font-size: 12px;
+}
+#load_success
+{
+	width: 160px;
+	height: 90px;
+}
+#load_success .load_info
+{
+	display: block;
+	font-size: 14px;
+}
+#load_success img
+{
+	display: inline-block;
+	padding-top: 9px;
+	height: 45px;
+}
 /* banner css ****************************************************/
 #banner
 {

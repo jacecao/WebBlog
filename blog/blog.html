@@ -37,7 +37,7 @@
 			</h2>
 			<p><label for="uesr">账 号：</label><input id="user" name="login_user" type="text" placeholder="电子邮件\电话号码"></p>
 			<p><label for="pass">密 码：</label><input id="pass"  name="login_pass" type="password"></p>
-			<input class="login_sub input_bar mouse" type="submit" value="登录">
+			<input class="login_sub input_bar mouse" type="button" value="登录">
 			<input class="login_reg input_bar mouse" type="button" value="注册">
 		</form><!-- 登陆表单结束 -->
 
@@ -49,8 +49,9 @@
 			<p>
 				<label for="reg_uesr">账&nbsp; &nbsp; &nbsp; &nbsp;号：</label><input id="reg_user"  name="reg_user" type="text" placeholder="输入账号">
 				<span class="info info_user">请输入用户名，2-10位，不得包括除‘_‘的其他字符</span>
-				<span class="info error_user">用户名错误或已注册！</span>
-				<span class="info right_user">该用户名可用！</span>
+				<span class="info error_user">用户名不合法！</span>
+				<span class="info right_user">用户名可用！</span>
+				<span class="info check_user load_info">正在检测用户名</span>
 			</p>
 			<p>
 				<label for="reg_pass">密&nbsp; &nbsp; &nbsp; &nbsp;码：</label><input id="reg_pass"  name="reg_pass" type="password">
@@ -113,7 +114,7 @@
 			</p>
 			<p class='text_number text_number_1'>还可以输入<span class="number">0</span>字</p>
 			<p class='text_number text_number_2'>已超过<span class="number">0</span>字<span class='text_clear'>清尾</span></p>
-			<input class="reg_reg input_bar mouse" type="button" value="注册">
+			<input class="reg_reg input_bar" disabled="true" type="button" value="注册">
 			<input class="reg_log input_bar mouse" type="button" value="登录">
 		</form><!-- 注册表单结束 -->
 	</header><!-- 头文件结束 -->
@@ -264,6 +265,21 @@
 		</div>
 	</div><!-- 分享栏结束 -->
 	<div id="local_screen"></div><!-- 遮罩 -->
+
+	<div id="loading" class="shadow"><!-- 显示数据提交或加载状态开始 -->
+		<div class="loading">
+	        <span></span>
+	        <span></span>
+	        <span></span>
+	        <span></span>
+	        <span></span>
+		</div>
+		<span class="load_info">数据正在提交</span>
+	</div>
+	<div id="load_success" class="shadow">
+		<img src="images/logo.png" alt="加载成功">
+		<span class="load_info">注册成功请登录！</span>
+	</div><!-- 显示数据提交或加载状态结束 -->
 	
 	<script src="js/blog.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/check_form.js" type="text/javascript" charset="UTF-8"></script>
