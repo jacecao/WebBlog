@@ -211,7 +211,7 @@ a{ text-decoration: none; color: gray;}
 #login
 {
 	width: 298px;
-	height: 208px;
+	height: 228px;
 }
 #reg
 {
@@ -319,6 +319,7 @@ a{ text-decoration: none; color: gray;}
 #login p
 {
 	margin-left: -3px;
+	margin-top: 0;
 }
 #reg p
 {
@@ -416,6 +417,14 @@ select::-ms-expand{ display: none;}
 	margin-left: 10px;
 }
 /************************ 表单提示信息 *******************************/
+#login .login_info
+{
+	height: 40px;
+	font-size: 14px;
+	line-height: 40px;
+	color: orange;
+}
+
 #reg .info
 {
 	display: block;

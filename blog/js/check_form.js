@@ -469,9 +469,7 @@ $(window).bind('load',function(){
 					{
 						$('#loading').hide();
 						$('#load_success').show().center(160,90);
-						setTimeout(function(){
-							hide_reg();
-						},1500);
+						setTimeout(hide_reg,1500);
 					}
 				},
 				async:true
@@ -481,7 +479,67 @@ $(window).bind('load',function(){
 
 	} );
 
+	//************************************ 登录账户 *************************************
+	var reset_login = function(){
+		$('#login .login_info').html('');
+		$('#login .login_sub').elements[0].disabled = false;
+		$('#login .login_sub').class('mouse');
+	};
+	$('#user').bind('focus',reset_login);
+	$('#pass').bind('focus',reset_login);
+	var check_login_user = function(){
+		var getValue = dele_spce( $('#login').form('login_user').value() );
+		return ( /\w{2,20}/.test( getValue ) && !/\W+/.test( getValue ) )?true:false;
+	};
+	var check_login_pass = function( )
+	{
+		var value = dele_spce( $('#login').form('login_pass').value() );
+		var code_length = 0;
+		if( /[0-9]/.test(value) )
+		{
+			code_length++;
+		}
+		if( /[a-z]/.test(value) )
+		{
+			code_length++;
+		}
+		if( /[A-Z]/.test(value) )
+		{
+			code_length++;
+		}
+		if( /[^\b\w]/.test(value) )
+		{
+			code_length++;
+		}
+		return ( value.length >= 6 && value.length <= 20 && !/\s/.test(value) && code_length >=2 )?true:false;
+	};
+	$('#login .login_sub').click(
+		function(){
+			if( check_login_user() && check_login_pass() )
+			{
+				$(this).elements[0].disabled = true;
+				$(this).removeClass('mouse');
+				$('#login .login_info').html('正在提交数据').class('load_info');
+				$().ajax({
+					method:'post',
+					url:'php/check_login.php',
+					data: $('#login').find(0).serialize(),
+					success:function(text){
+						$('#login .login_info').removeClass('load_info');
+						if( text == 1 )
+						{
+							setTimeout(hide_login,1500);
+						}else{
+							$('#login .login_info').html('用户名不存在或密码错误');
+						}
+					},
+					async:true
+				});
+			}else{
+				$('#login .login_info').html('用户名或密码不合法');
+			}
 
+	});
 
 
 });

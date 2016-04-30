@@ -58,7 +58,13 @@ var hide_reg = function(){
 	$('#reg .info').hide();
 	closed_fun( $('#reg') );
 };
-
+//隐藏登录框 ***************************************************
+var hide_login = function(){
+	$('#login').elements[0].reset();
+	$('#login .login_sub').elements[0].disabled = false;
+	$('#login .login_info').html('');
+	closed_fun( $("#login") ); 
+};
 $(function(){
 	var over = function()
 		{
@@ -89,11 +95,13 @@ $(function(){
 	$("#login .login_closed").click(
 		//由于closed_fun()需要传参所以这里不能直接写closed_fun( $("#login")
 		//而需要一个匿名函数来调用该函数，否则不能执行
-		function()
-		{ 
-			$('#login').elements[0].reset();
-			closed_fun( $("#login") ); 
-		}
+		// function()
+		// { 
+		// 	$('#login').elements[0].reset();
+		// 	$('#login .login_info').html('');
+		// 	closed_fun( $("#login") ); 
+		// }
+		hide_login
 	);
 	//点击登陆框注册按钮 ***************************************************
 	//点击注册框登陆按钮
