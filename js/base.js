@@ -773,8 +773,53 @@ Elements.prototype =
 				}
 			}
 			return this;
-		},		
-	//自定义方法	
+		},
+	//******************** 设置或获取cookie************************************	
+	//参数说明 name\value 必须 构成键值对，如果只传入name一个参数那么表示获取cookie
+	//expires：失效时间，_path:允许访问路径，设定指定访问该cookie的路径
+	//_domain: 允许访问域名，只有设置的域名才可以方位该cookie
+	//secure： 安全设置，指明必须通过安全的通信通道来传输（HTTPS）才能获取cooki
+	cookie:function( name, value, expires, _path, _domain, secure )
+		{
+			if( arguments.length == 1 )
+			{
+				var cookieName = encodeURIComponent( name ) + "=";
+				var cookieStart = document.cookie.indexOf( cookieName );
+				var cookieValue = null;
+				if( cookieStart > -1 )
+				{
+					var cookieEnd = document.cookie.indexOf(';',cookieStart);
+					if( cookieEnd == -1 ){
+						//name存在但没有值的情况
+						cookieEnd = document.cookie.length;
+					}
+					var _value = document.cookie.substring(cookieStart+cookieName.length,cookieEnd);
+					cookieValue = decodeURIComponent( _value );
+					_value = null;
+				}
+				return cookieValue;
+			}else{
+				var cookieText = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+				if( expires instanceof Date )//是否是一个时间值
+				{
+					cookieText += ';expires=' + expires;
+				}
+				if( _path )
+				{
+					cookieText += ';path=' + _path;
+				}
+				if( _domain )
+				{
+					cookieText += ';domain=' + _domain;
+				}
+				if( secure )
+				{
+					cookieText += ';secure';
+				}
+				document.cookie = cookieText;
+			}
+		},	
+	//********************* 自定义方法 ***************************	
 	extend:function( name, fn )
 		{
 			Elements.prototype[name] = fn;

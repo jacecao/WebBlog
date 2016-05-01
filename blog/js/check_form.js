@@ -453,7 +453,8 @@ $(window).bind('load',function(){
 			$('#reg .reg_reg').elements[0].disabled = false;
 			$('#reg .reg_reg').class('mouse').class('reg_active');
 		}
-	});	
+	});
+	//点击注册按钮********************************
 	$('#reg .reg_reg').click( function(){
 		if( _check_from() )
 		{
@@ -469,6 +470,7 @@ $(window).bind('load',function(){
 					{
 						$('#loading').hide();
 						$('#load_success').show().center(160,90);
+						$('#load_success .load_info').html('注册成功请登录！');
 						setTimeout(hide_reg,1500);
 					}
 				},
@@ -528,7 +530,15 @@ $(window).bind('load',function(){
 						$('#login .login_info').removeClass('load_info');
 						if( text == 1 )
 						{
-							setTimeout(hide_login,1500);
+							var _user = dele_spce( $('#login').form('login_user').value() );
+							$().cookie('user',_user);
+							setTimeout(function(){
+								hide_login();
+								//登陆成功后隐藏登陆和注册按钮 显示登陆用户名
+								$('#header .login').hide();
+								$('#header .regiter').hide();
+								$('#header .login_success').css('display','inline-block').html( $().cookie('user') );
+							},1500);	
 						}else{
 							$('#login .login_info').html('用户名不存在或密码错误');
 						}
@@ -540,7 +550,66 @@ $(window).bind('load',function(){
 			}
 
 	});
+	/******************** 发微博 ********************************/
+	//打开发文弹出*********************
+	$('#control_bar .blog').click(
+		function()
+		{
+			out();
+			show_fun( $('#write_blog'),$('#blog_h2') );
+		}	
+	);
+	//**********************发送内容***********************
+	var check_blog = function(){
+		var _flag = null;
+		var blog_title = dele_spce( $('#write_blog').form('blog_title').value() );
+		var blog_cont = dele_spce( $('#write_blog').form('blog_content').value() );
+		if( blog_title.length == 0 || blog_cont.length == 0 )
+		{
+			$('#write_blog .blog_sub').removeClass('reg_active').removeClass('mouse');
+			_flag = false;
+		}else{
+			_flag = true;
+			$('#write_blog .blog_sub').elements[0].disabled = false;
+			$('#write_blog .blog_sub').class('reg_active').class('mouse');
+		}
+		return _flag;
+	};
+	$('#write_blog .title').bind('keyup',check_blog);
+	$('#blog_content').bind('keyup',check_blog);
 
+	$('#write_blog .blog_sub').click(function(){
+		if( check_blog() )
+		{
+			$(this).elements[0].disabled = true;
+			$(this).removeClass('reg_active').removeClass('mouse');
+			$('#loading').show().center(200,60);
+			$().ajax({
+				method:'post',
+				url:'php/config.php',
+				data: $('#reg').find(0).serialize(),
+				success:function(text){
+					if( text == 1 )
+					{
+						$('#loading').hide();
+						$('#load_success').show().center(160,90);
+						$('#load_success .load_info').html('发文成功！');
+						setTimeout(function(){
+							$('#write_blog').elements[0].reset();
+							$('#load_success').hide();
+							closed_fun( $('#write_blog') );
+						},1500);
+					}
+				},
+				async:true
+			});
+		}	
+	});
+	//关闭发文弹出*********************
+	$('#write_blog .blog_closed').click(function(){
+		$('#write_blog').elements[0].reset();
+		closed_fun( $('#write_blog') );
+	});
 
 });
 

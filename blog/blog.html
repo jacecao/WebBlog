@@ -19,15 +19,16 @@
 			<img class="logo" src="images/logo.png" alt="logo">
 			<div class="right_bar"><!-- 头部右边菜单开始 -->
 				<div class="set_bar">个人中心<span></span>
-					<ul class="bar_ul">
-						<li><a class="a" href="#">设置</a></li>
-						<li><a class="a" href="#">换肤</a></li>
-						<li><a class="a" href="#">帮助</a></li>
-						<li><a class="a" href="#">退出</a></li>
+					<ul class="bar_ul" id="control_bar">
+						<li class="a set">设置</li>
+						<li class="a skin">换肤</li>
+						<li class="a blog">发文</li>
+						<li class="a exit">退出</li>
 					</ul>
 				</div>
 				<span class="login bar">登录</span>
-				<span class="regiter bar">注册</span>	
+				<span class="regiter bar">注册</span>
+				<span class="login_success bar"></span>
 			</div><!-- 头部右边菜单结束 -->
 		</nav>
 		<!-- 登录表单开始 -->
@@ -38,7 +39,7 @@
 			<div class="login_info"></div>
 			<p><label for="uesr">账 号：</label><input id="user" name="login_user" type="text" placeholder="电子邮件\电话号码"></p>
 			<p><label for="pass">密 码：</label><input id="pass"  name="login_pass" type="password"></p>
-			<input class="login_sub input_bar mouse" type="button" value="登录">
+			<input class="login_sub input_bar" type="button" value="登录">
 			<input class="login_reg input_bar mouse" type="button" value="注册">
 		</form><!-- 登陆表单结束 -->
 
@@ -277,12 +278,25 @@
 		</div>
 		<span class="load_info">数据正在提交</span>
 	</div>
+
 	<div id="load_success" class="shadow">
 		<img src="images/logo.png" alt="加载成功">
-		<span class="load_info">注册成功请登录！</span>
+		<span class="load_info"></span>
 	</div><!-- 显示数据提交或加载状态结束 -->
+
+	<form action="" id="write_blog"><!-- 发文开始 -->
+		<h2 id="blog_h2" class="blog_h2">真正的你就在这字里行间
+			<img class="rotate blog_closed" src="images/closed_btn.png" />
+		</h2>
+		<dl>
+			<dd>主&nbsp; 题：<input type="text" name="blog_title" class="title"></dd>
+			<dd><span>主&nbsp; 体：</span><textarea name="blog_content" id="blog_content"></textarea></dd>
+		</dl>
+		<input class="blog_sub input_bar" type="button" value="发文" disabled="true">
+	</form><!-- 发文结束 -->
 	
 	<script src="js/blog.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/check_form.js" type="text/javascript" charset="UTF-8"></script>
+
 </body>
 </html>

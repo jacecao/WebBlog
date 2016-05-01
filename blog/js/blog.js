@@ -62,27 +62,29 @@ var hide_reg = function(){
 var hide_login = function(){
 	$('#login').elements[0].reset();
 	$('#login .login_sub').elements[0].disabled = false;
+	$('#login .login_sub').removeClass('mouse');
 	$('#login .login_info').html('');
 	closed_fun( $("#login") ); 
 };
+//列表鼠标移入移出*************************************
+var over = function()
+	{
+		$("#header .bar_ul").show().animate({
+			time:30,
+			mix:{'height':122,'opacity':100}
+		});
+	},
+	out = function()
+	{
+		$("#header .bar_ul").animate({
+			mix:{'height':0,'opacity':0},
+			time:30,
+			fn: function(){
+				$("#header .bar_ul").hide();
+			}
+		});
+	};
 $(function(){
-	var over = function()
-		{
-			$("#header .bar_ul").show().animate({
-				time:30,
-				mix:{'height':122,'opacity':100}
-			});
-		},
-		out = function()
-		{
-			$("#header .bar_ul").animate({
-				mix:{'height':0,'opacity':0},
-				time:30,
-				fn: function(){
-					$("#header .bar_ul").hide();
-				}
-			});
-		};
 	//个人中心鼠标移入移出事件 ***************************************************
 	$("#header .set_bar").hover( over,out ).class("click");
     //登录框和遮罩设置 ***************************************************

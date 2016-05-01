@@ -70,8 +70,6 @@ a{ text-decoration: none; color: gray;}
 	z-index: 800;
 }
 
-
-
 /* header css ****************************************************/
 #header
 {
@@ -168,14 +166,8 @@ a{ text-decoration: none; color: gray;}
 	height: 30px;
 	width: 78px;
 	line-height: 30px;
-}
-#header ul li a
-{
-    display: block;
-    height:30px;
-	width: 73px;
-    letter-spacing: 10px;
-    padding-left: 5px;
+	text-align: center;
+	letter-spacing: 8px;
 }
 
 /* 头部-登录 注册 ************************************************/
@@ -189,8 +181,15 @@ a{ text-decoration: none; color: gray;}
 {
 	margin-left: 10px;
 }
+#header .login_success
+{
+	display: none;
+	width: auto;
+	margin-left: 10px;
+	text-decoration: underline;
+}
 /*所有 登录框 注册框 弹出框 css*************************************************/
-#login,#reg,#show_img
+#login,#reg,#show_img,#write_blog
 {	
 	background-color: #eaeaea ;
 	font-size: 16px;
@@ -223,7 +222,12 @@ a{ text-decoration: none; color: gray;}
 	width: 600px;
 	height: 550px;
 }
-#login h2,#reg h2,#show_img_h2
+#write_blog
+{
+	width: 460px;
+	min-height: 350px;
+}
+#login h2,#reg h2,#show_img_h2,#blog_h2
 {
 	height: 38px;
 	line-height: 40px;
@@ -233,6 +237,12 @@ a{ text-decoration: none; color: gray;}
 	padding: 0;
 	border-bottom: 2px solid rgba(200,200,200,.4);
 	position: relative;
+}
+#write_blog h2
+{
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: 2px;
 }
 /*************show_img*******************************/
 #show_img_h2
@@ -302,12 +312,12 @@ a{ text-decoration: none; color: gray;}
 {
 	right: 0;
 }
-/************************************ login reg *******************************/
-#login h2,#reg h2,#show_img_h2
+/******************** login reg blog *******************************/
+#login h2,#reg h2,#show_img_h2,#blog_h2
 {
 	cursor: move;
 }
-#login h2 img,#reg h2 img,#show_img h2 img
+#login h2 img,#reg h2 img,#show_img h2 img,#blog_h2 img
 {
 	position: absolute;
 	width: 28px;
@@ -328,7 +338,7 @@ a{ text-decoration: none; color: gray;}
 	width: 250px;
 	position: relative;
 }
-#reg .reg_active /* 注册按钮被激活 */
+#reg .reg_active,#write_blog .reg_active /* 按钮被激活 */
 {
 	color: orange;
 }
@@ -415,6 +425,48 @@ select::-ms-expand{ display: none;}
 	letter-spacing: 3px;
 	font-weight: bold;
 	margin-left: 10px;
+}
+/************************  blog   ****************************/
+#write_blog dl
+{
+	width: 90%;
+	margin: 0;
+	padding-left: 10px;
+	text-align: left;
+}
+#write_blog dd
+{
+	margin: 10px 0 0 0;
+	color: #B6B0B0;
+}
+#write_blog dd span
+{
+	vertical-align: top;
+}
+#write_blog dd:first-child
+{
+	margin-top: 20px;
+}
+#write_blog dl input,#write_blog dl textarea
+{
+	outline: none;
+	border: none;
+	background-color: #eee;
+	box-shadow: 0 0 2px 2px #fff inset;
+	padding: 5px;
+}
+#write_blog dl input
+{
+	height: 15px;
+}
+#blog_content
+{
+	min-height: 200px;
+	width: 340px;
+} 
+#write_blog .blog_sub
+{
+	margin-top: 5px;
 }
 /************************ 表单提示信息 *******************************/
 #login .login_info
