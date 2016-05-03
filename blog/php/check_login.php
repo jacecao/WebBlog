@@ -11,6 +11,7 @@
 		  die('Could not connect: ' . mysql_error());
 		  }
 		mysqli_select_db($con,'blog');
+		mysqli_query($con,"set names 'utf8'");
 		$pass = sha1($_POST['login_pass']);
 		$query = "SELECT user FROM blog_user WHERE user='{$_POST['login_user']}' AND pass='{$pass}'";
 		$flag = mysqli_query($con,$query) or die('SQL出错');

@@ -14,7 +14,7 @@
 	  die('Could not connect: ' . mysql_error());
 	  }
 	mysqli_select_db($con,'blog'); 
-
+	mysqli_query($con,"set names 'utf8'");
 	$_birthday = $_POST['reg_year'].'-'.$_POST['reg_month'].'-'.$_POST['reg_day'];
 	$query = "INSERT INTO blog_user(user,pass,ques,ans,email,birthday,ps)
 					VALUES('{$_POST['reg_user']}',sha1('{$_POST['reg_pass']}'),'{$_POST['reg_ques']}','{$_POST['reg_ans']}','{$_POST['reg_email']}','{$_birthday}','{$_POST['reg_ps']}')";

@@ -1,5 +1,4 @@
 <?php
-	
 	header('Content-Type:text/html;charset=utf-8');
 
 	define('DB_HOST','localhost');
@@ -11,16 +10,17 @@
 	  {
 	  die('Could not connect: ' . mysql_error());
 	  }
-	mysqli_select_db($con,'blog');
+	mysqli_select_db($con,'blog'); 
+	$query = "INSERT INTO blog_blog(title,content,date)
+					VALUES('{$_POST['blog_title']}','{$_POST['blog_content']}',NOW())";
+	
 	mysqli_query($con,"set names 'utf8'");
-	$query = "SELECT user FROM blog_user WHERE user='{$_POST['reg_user']}'";
-	$flag = mysqli_query($con,$query) or die('SQL出错');
+	mysqli_query($con,$query) or die('新增出错'.mysql.error());
 	
 	sleep(3); //模拟网络延迟
-	if( mysqli_fetch_array($flag,MYSQLI_ASSOC) )
-	{
-		echo 1;
-	}
+	echo mysqli_affected_rows( $con );
+	
 	mysqli_close($con);
+
 
 ?>

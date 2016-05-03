@@ -714,20 +714,36 @@ select::-ms-expand{ display: none;}
 #main
 {
 	width: 900px;
-	margin: 20px auto; /* 注意这里必须要大于20 才能使内部元素顶部对齐，因为header右侧部分有元素下移了20px，印象了main中元素的对齐*/
+	margin: 20px auto;
+}
+#main .side_bar,#main .main_content
+{
+	height: 560px;
+	background-color: #eee;
+	overflow: hidden;
 }
 #main .side_bar
 {
 	width: 250px;
-	height: 560px;
 	background-color: #eee;
 	float: left;
 }
-#main .side_bar h2
+#main .blog_loading
+{
+	margin-top: 270px;
+	display: none;
+}
+#main .blog_content
+{
+	opacity: 1;
+	max-height: 180px;
+	overflow: hidden;
+}
+#main .side_bar h2,#main .main_content h2
 {
 	width: 248px;
 	height: 29px;
-	line-height: 30px;
+	line-height: 29px;
 	margin: 0;
 	font-size: 14px;
 	background-color:#dbdbdb;
@@ -736,18 +752,24 @@ select::-ms-expand{ display: none;}
 	border-bottom: none;
 	cursor: pointer;
 }
+#main .main_content h2 em
+{
+	font-style: normal;
+	font-weight: normal;
+	padding: 0 15px 0 0;
+	float: right;
+}
+#main .side_bar ul,#main .blog_content
+{
+		margin: 0 0 10px 0;
+}
 #main .side_bar ul
 {
 	width: 248px;
 	height: 148px;
 	border: 1px solid #ccc;
-	margin: 0 0 10px 0;
 	overflow: hidden;
 	opacity: 1;
-}
-#main .side_bar ul:lastchild()
-{
-	margin-bottom: 0;
 }
 #main .side_bar ul li
 {
@@ -758,9 +780,22 @@ select::-ms-expand{ display: none;}
 #main .main_content
 {
 	width: 630px;
-	height: 560px;
 	background-color: #eee;
 	float: right;
+}
+#main .main_content h2
+{
+	width: 628px;
+}
+#main .main_content p
+{
+	width: 618px;
+	height: 138px;
+	margin: 0;
+	padding: 5px;
+	text-indent: 28px;
+	border: 1px solid #ccc;
+	overflow: hidden;
 }
 /* main_nav ***************************************************/
 #main .main_nav

@@ -586,8 +586,8 @@ $(window).bind('load',function(){
 			$('#loading').show().center(200,60);
 			$().ajax({
 				method:'post',
-				url:'php/config.php',
-				data: $('#reg').find(0).serialize(),
+				url:'php/add_blog.php',
+				data: $('#write_blog').find(0).serialize(),
 				success:function(text){
 					if( text == 1 )
 					{
@@ -607,6 +607,8 @@ $(window).bind('load',function(){
 	});
 	//关闭发文弹出*********************
 	$('#write_blog .blog_closed').click(function(){
+		$('#loading').hide();
+		$('#load_success').hide();
 		$('#write_blog').elements[0].reset();
 		closed_fun( $('#write_blog') );
 	});

@@ -36,6 +36,8 @@ var show_fun = function( obj, ele )
 var closed_fun = function( obj )
 {
 	obj.hide();
+	$('#loading').hide();
+	$('#load_success').hide();
 	$("#local_screen").animate({
 		attr:'opacity',
 		target:0,
@@ -53,8 +55,6 @@ var hide_reg = function(){
 	$('#reg .reg_reg').elements[0].disabled = true;
 	$('#reg .reg_reg').removeClass('mouse').removeClass('reg_active');
 	//关闭注册框强制隐藏所有提示信息
-	$('#loading').hide();
-	$('#load_success').hide();
 	$('#reg .info').hide();
 	closed_fun( $('#reg') );
 };
@@ -192,17 +192,22 @@ $(function(){
 				}
 			});
 	});
-	//主体左侧滑动菜单栏	***************************************************
-	$('#main h2').toggle(
-		function(){
-			$(this).next().animate({
-				mix:{'height':0,'opacity':0}
-			});
-		},function(){
-				$(this).next().animate({
-				mix:{'height':148,'opacity':100}
-			});
+	//主体点击标题滑动菜单	***************************************************
+	//上下滑动函数 ********************?????????????????????????????************
+	//为什么这里作为参数传入target的值就不呢？？？？？？？？？？？？？？************
+	var main_tog_0 = function()
+	{
+		$(this).next().animate({
+			mix:{'height':0,'opacity':0}
 		});
+	};
+	var main_tog_1 = function(obj,target)
+	{
+		obj.next().animate({
+			mix:{'height':target ,'opacity':100}
+		});
+	};
+	$('#main .side_bar h2').toggle(main_tog_0,function(){main_tog_1($(this),148);});
 
 	//bannner 轮播广告部分***************************************************
 	//轮播初始状态
@@ -433,7 +438,35 @@ $(function(){
 		removeEvent(document,'selectstart',preDef);	
 	} );
 	
-	//*************************************调用ajax***********************************
+	//*************************************调用ajax获取最新博文内容***********************************
+	$('#main .blog_loading').show();
+	$().ajax({
+		method:'get',
+		url:'php/get_blog.php',
+		success:function(text){
+			$('#main .blog_loading').hide();
+			var json = JSON.parse(text);
+			var html = '';
+			for( var i = 0; i < json.length; i++ ){
+				html += '<div class="blog_content"><h2 class="mouse">'+json[i].title+'<em>'+json[i].date+'</em></h2><p>'+json[i].content+'</p></div>';
+			}
+			$('#main .main_content').html(html);
+			for( var i = 0; i < $('#main .blog_content').length(); i++ )
+			{
+				//animate()无法支持多个对象同时实现动画，所以只能单个加载
+				$('#main .blog_content').find(i).animate({
+					attr:'opacity',
+					target: 100,
+					time:100
+				});
+			}
+			//由于此处DOM结构改变，所以需要再一次点击滑动函数
+			$('#main .main_content h2').toggle(main_tog_0,function(){main_tog_1($(this),138);});
+		},
+		async:true
+	});
+
+
 
 
 
