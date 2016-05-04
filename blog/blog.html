@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><!-- 防止数据库不能识别中文编码 -->
-	<title>WEB博客</title>
+	<title>邀旅行</title>
 	<link rel="icon" href="images/logo.jpg" type="image/gif"/>
 	<script src="../js/tool.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="../js/base.js" type="text/javascript" charset="UTF-8"></script>
@@ -216,7 +216,7 @@
 		</nav>
 	</section>
 	
-	<section id="photo" class="main_width"><!-- 图片展示开始 -->
+	<section id="photo" class="main_width clearfix"><!-- 图片展示开始 -->
 		<div id="show_img"><!-- 显示大图开始 -->
 			<h2 id="show_img_h2" class="show_img_h2">图片预加载
 				<img class="rotate show_img_closed" src="images/closed_btn.png" />
@@ -275,8 +275,6 @@
 		</div>	
 	</section><!-- 图片展示结束 -->
 	
-	<footer></footer>	
-	
 	<div id="share_box"><!-- 分享栏开始 -->
 		<div id="share">
 			<h2 class='bar'>分<br/>享</h2>
@@ -316,6 +314,34 @@
 		<input class="blog_sub input_bar" type="button" value="发文" disabled="true">
 	</form><!-- 发文结束 -->
 	
+	<div id="show_skin"><!-- 换肤开始 -->
+		<h2 class="show_skin_h2">皮肤预览 <span>默 认</span>
+			<img class="rotate show_skin_closed" src="images/closed_btn.png" />
+		</h2>
+		<div class="skin_box">
+			<div class="skin_img">
+				<img class="show_skin_img" src="images/skin/skin_small_1.jpg" alt=" ">
+				<img class="show_skin_img" src="images/skin/skin_small_2.jpg" alt=" ">
+				<img class="show_skin_img" src="images/skin/skin_small_3.jpg" alt=" ">
+			</div>
+		</div>
+		<strong class="sl">&lt;</strong>
+		<strong class="sr">&gt;</strong>
+		<div class="show_left show_bar"></div>
+		<div class="show_right show_bar"></div>
+		<div class="loading show_loading">
+	        <span></span>
+	        <span></span>
+	        <span></span>
+	        <span></span>
+	        <span></span>
+		</div>
+	</div><!-- 换肤结束 -->
+
+	<footer>
+		<p class="mouse"> 要旅行 —— 联系我们 </p>
+		<p>&copy;Design Your Travel</p>
+	</footer>
 	<script src="js/blog.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/check_form.js" type="text/javascript" charset="UTF-8"></script>
 

@@ -84,6 +84,15 @@ var over = function()
 			}
 		});
 	};
+//***************************** 透明度变化 **************************
+var _opacity = function( obj ,target )
+	{
+		obj.animate({
+			attr: 'opacity',
+			target: target,
+			time: 50
+		});
+	};	
 $(function(){
 	//个人中心鼠标移入移出事件 ***************************************************
 	$("#header .set_bar").hover( over,out ).class("click");
@@ -362,12 +371,12 @@ $(function(){
 				});
 			};
 			$('#show_img .show_left').hover(
-				function(){_hover($('#show_img .sl'),40);},
-				function(){_hover($('#show_img .sl'),0);}
+				function(){_opacity($('#show_img .sl'),40);},
+				function(){_opacity($('#show_img .sl'),0);}
 				);
 			$('#show_img .show_right').hover(
-				function(){_hover($('#show_img .sr'),40);},
-				function(){_hover($('#show_img .sr'),0);}
+				function(){_opacity($('#show_img .sr'),40);},
+				function(){_opacity($('#show_img .sr'),0);}
 				);
 			//*****************************预加载上一张和下一张****************************
 			children = this.parentNode.parentNode;
@@ -465,7 +474,55 @@ $(function(){
 		},
 		async:true
 	});
-
+	//************************************ 换肤 ********************************************
+	//打开换肤弹出*********************
+	$('#control_bar .skin').click(
+		function()
+		{
+			out();
+			show_fun( $('#show_skin'));
+			//****************** 显示左右切换按钮 *****************
+			$('#show_skin .show_left').hover(
+				function(){_opacity($('#show_skin .sl'),40);},
+				function(){_opacity($('#show_skin .sl'),0);}
+				);
+			$('#show_skin .show_right').hover(
+				function(){_opacity($('#show_skin .sr'),40);},
+				function(){_opacity($('#show_skin .sr'),0);}
+				);
+			//***************** 点击左右按钮 ********************
+			var target = 0;
+			$('#show_skin .show_left').click(function(){
+				target -= 500;
+				if( target < 0 )
+				{
+					target = 1000;
+				}
+				$('#show_skin .skin_img').animate({
+					attr:'left',
+					target:-target
+				});
+			});
+			$('#show_skin .show_right').click(function(){
+				target += 500;
+				if( target == 0 )
+				{
+					target = 1000;
+				}else if( target == 1500 ){
+					target = 0;
+				}
+				$('#show_skin .skin_img').animate({
+					attr:'left',
+					target:-target
+				});
+			});
+		}	
+	);
+	//关闭换肤弹出*********************
+		$('#show_skin .show_skin_closed').click(function(){
+			$('.show_loading').hide();
+			closed_fun( $('#show_skin') );
+		});
 
 
 
