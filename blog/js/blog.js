@@ -483,12 +483,12 @@ $(function(){
 			show_fun( $('#show_skin'));
 			//****************** 显示左右切换按钮 *****************
 			$('#show_skin .show_left').hover(
-				function(){_opacity($('#show_skin .sl'),40);},
-				function(){_opacity($('#show_skin .sl'),0);}
+				function(){_opacity($('#show_skin .sl'),100);},
+				function(){_opacity($('#show_skin .sl'),40);}
 				);
 			$('#show_skin .show_right').hover(
-				function(){_opacity($('#show_skin .sr'),40);},
-				function(){_opacity($('#show_skin .sr'),0);}
+				function(){_opacity($('#show_skin .sr'),100);},
+				function(){_opacity($('#show_skin .sr'),40);}
 				);
 			//***************** 点击左右按钮 ********************
 			var target = 0;

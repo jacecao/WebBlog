@@ -892,7 +892,8 @@ Elements.prototype =
 				{
 					obj.success(xhr.responseText);
 				}else{
-					alert('获取数据错误！错误代号：'+xhr.status+'错误信息：'+xhr.statusText);
+					console.error('获取数据错误！错误代号：'+xhr.status+'错误信息：'+xhr.statusText);
+					console.log('请检查服务器是否成功连接');
 				}
 			}
 		}

@@ -3,7 +3,7 @@ html,body,ul{ margin: 0; padding: 0;}
 body
 { 
 	background-color: #eaeaea;
-	background-image: url(../images/skin/skin_2.jpg);
+	/* background-image: url(../images/skin/skin_2.jpg); */
 	background-repeat: no-repeat;
 	background-size: contain;
 	font-family: "Microsoft YaHei"; 
@@ -201,7 +201,7 @@ a{ text-decoration: none; color: gray;}
 /*所有 登录框 注册框 弹出框 css*************************************************/
 #login,#reg,#show_img,#write_blog,#show_skin
 {	
-	background-color: #eaeaea ;
+	background-color: rgba(32,32,32,0.4) ;
 	font-size: 16px;
 	border: 1px solid rgba(0,0,0,.1);
 	box-shadow: 0 0 3px 3px rgba(0,0,0,.1);
@@ -274,8 +274,8 @@ a{ text-decoration: none; color: gray;}
 }
 .show_skin_h2 span
 {
-	float: right;
-	margin-right: 30px;
+	position: absolute;
+	right: 30px;
 	letter-spacing: 0;
 	cursor: pointer;
 }
@@ -292,6 +292,17 @@ a{ text-decoration: none; color: gray;}
 	overflow: hidden;
 	margin: 5px auto;
 }
+.skin_box span
+{
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	bottom: 0;
+	text-align: center;
+	background-color: rgba(0,0,0,.4);
+}
 .skin_img
 {
 	height: 250px;
@@ -304,7 +315,9 @@ a{ text-decoration: none; color: gray;}
 {
 	width: 500px;
 	height: 250px;
+	opacity: 0;
 	float: left;
+	cursor: pointer;
 }
 #show_img .show_index
 {
@@ -346,6 +359,10 @@ a{ text-decoration: none; color: gray;}
 	cursor: pointer;
 	position: absolute;
 	opacity: 0;
+}
+#show_skin strong
+{
+	opacity: 0.4;
 }
 #show_img .sl
 {
@@ -434,7 +451,7 @@ a{ text-decoration: none; color: gray;}
 #reg_ques
 {
 	margin-left: -5px;
-	width: 148px;
+	width: 153px;
 }
 #reg .reg_date
 {
@@ -527,7 +544,8 @@ select::-ms-expand{ display: none;}
 {
 	outline: none;
 	border: none;
-	background-color: #eee;
+	color:#eee;
+	background-color: rgba(32,32,32,0);
 	box-shadow: 0 0 2px 2px #fff inset;
 	padding: 5px;
 }

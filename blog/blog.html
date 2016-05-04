@@ -14,23 +14,57 @@
 </head>
 <body>
 	
-	<header id="header"><!-- 头文件开始 -->
-		<nav class="width clearfix">
-			<img class="logo" src="images/logo.png" alt="logo">
-			<div class="right_bar"><!-- 头部右边菜单开始 -->
-				<div class="set_bar">个人中心<span></span>
-					<ul class="bar_ul" id="control_bar">
-						<li class="a set">设置</li>
-						<li class="a skin">换肤</li>
-						<li class="a blog">发文</li>
-						<li class="a exit">退出</li>
-					</ul>
+	<!-- 很奇怪的是把这个模块放在最后会出现布局问题  原因是绝对定位的问题 -->
+	<section><!--弹出窗口 -->
+		<div id="local_screen"></div><!-- 遮罩 -->
+		<div id="loading" class="shadow"><!-- 显示数据提交或加载状态开始 -->
+			<div class="loading">
+		        <span></span>
+		        <span></span>
+		        <span></span>
+		        <span></span>
+		        <span></span>
+			</div>
+			<span class="load_info">数据正在提交</span>
+		</div>
+		<div id="load_success" class="shadow">
+			<img src="images/logo.png" alt="加载成功">
+			<span class="load_info"></span>
+		</div><!-- 显示数据提交或加载状态结束 -->
+		<form action="" id="write_blog"><!-- 发文开始 -->
+			<h2 id="blog_h2" class="blog_h2">真正的你就在这字里行间
+				<img class="rotate blog_closed" src="images/closed_btn.png" />
+			</h2>
+			<dl>
+				<dd>主&nbsp; 题：<input type="text" name="blog_title" class="title"></dd>
+				<dd><span>主&nbsp; 体：</span><textarea name="blog_content" id="blog_content"></textarea></dd>
+			</dl>
+			<input class="blog_sub input_bar" type="button" value="发文" disabled="true">
+		</form><!-- 发文结束 -->
+		<div id="show_skin"><!-- 换肤开始 -->
+			<h2 class="show_skin_h2">皮肤预览 <span>默 认</span>
+				<img class="rotate show_skin_closed" src="images/closed_btn.png" />
+			</h2>
+			<div class="skin_box">
+				<div class="skin_img">
+					<!-- <img class="show_skin_img" src="images/skin/skin_small_1.jpg" alt=" "> -->
+					<!-- <img class="show_skin_img" src="images/skin/skin_small_2.jpg" alt=" "> -->
+					<!-- <img class="show_skin_img" src="images/skin/skin_small_3.jpg" alt=" "> -->
 				</div>
-				<span class="login bar">登录</span>
-				<span class="regiter bar">注册</span>
-				<span class="login_success bar"></span>
-			</div><!-- 头部右边菜单结束 -->
-		</nav>
+				<span>皮肤名</span>
+			</div>
+			<strong class="sl">&lt;</strong>
+			<strong class="sr">&gt;</strong>
+			<div class="show_left show_bar"></div>
+			<div class="show_right show_bar"></div>
+			<div class="loading show_loading">
+		        <span></span>
+		        <span></span>
+		        <span></span>
+		        <span></span>
+		        <span></span>
+			</div>
+		</div><!-- 换肤结束 -->	
 		<!-- 登录表单开始 -->
 		<form action="" id="login"><!-- 登陆表单开始 -->
 			<h2 id="login_h2" class="login_h2">登&nbsp;&nbsp;录
@@ -42,7 +76,6 @@
 			<input class="login_sub input_bar" type="button" value="登录">
 			<input class="login_reg input_bar mouse" type="button" value="注册">
 		</form><!-- 登陆表单结束 -->
-
 		<!-- 注册表单开始 -->
 		<form action="" id="reg"><!-- 注册表单开始 -->
 			<h2 id="reg_h2" class="reg_h2">账 号 注 册
@@ -119,6 +152,25 @@
 			<input class="reg_reg input_bar" disabled="true" type="button" value="注册">
 			<input class="reg_log input_bar mouse" type="button" value="登录">
 		</form><!-- 注册表单结束 -->
+	</section><!--弹出窗口结束 -->
+
+	<header id="header"><!-- 头文件开始 -->
+		<nav class="width clearfix">
+			<img class="logo" src="images/logo.png" alt="logo">
+			<div class="right_bar"><!-- 头部右边菜单开始 -->
+				<div class="set_bar">个人中心<span></span>
+					<ul class="bar_ul" id="control_bar">
+						<li class="a set">设置</li>
+						<li class="a skin">换肤</li>
+						<li class="a blog">发文</li>
+						<li class="a exit">退出</li>
+					</ul>
+				</div>
+				<span class="login bar">登录</span>
+				<span class="regiter bar">注册</span>
+				<span class="login_success bar"></span>
+			</div><!-- 头部右边菜单结束 -->
+		</nav>
 	</header><!-- 头文件结束 -->
 	
 	<section id="banner"><!-- 广告轮播开始 -->
@@ -179,14 +231,6 @@
 		        <span></span>
 		        <span></span>
 			</div>
-<!-- 			<div class="blog_content">
-				<h2>12<em>12</em></h2>
-				<p>asdasd</p>
-			</div>
-			<div class="blog_content">
-				<h2>12<em>12</em></h2>
-				<p>asdasd</p>
-			</div> -->
 		</div>
 		
 		<nav class="main_nav">
@@ -268,10 +312,6 @@
 				<dt><img _src="images/photo/photo_8.jpg" _big_src="images/photo/b_8.jpg" src="images/photo/photo_load.jpg" alt="7" /></dt>
 				<dd>延迟加载图片</dd>
 			</dl>
-			<dl>
-				<dt><img _src="images/photo/photo_9.jpg" _big_src="images/photo/b_9.jpg" src="images/photo/photo_load.jpg" alt="8" /></dt>
-				<dd>延迟加载图片</dd>
-			</dl>
 		</div>	
 	</section><!-- 图片展示结束 -->
 	
@@ -284,64 +324,12 @@
 			</ul>
 		</div>
 	</div><!-- 分享栏结束 -->
-	
-	<div id="local_screen"></div><!-- 遮罩 -->
-
-	<div id="loading" class="shadow"><!-- 显示数据提交或加载状态开始 -->
-		<div class="loading">
-	        <span></span>
-	        <span></span>
-	        <span></span>
-	        <span></span>
-	        <span></span>
-		</div>
-		<span class="load_info">数据正在提交</span>
-	</div>
-
-	<div id="load_success" class="shadow">
-		<img src="images/logo.png" alt="加载成功">
-		<span class="load_info"></span>
-	</div><!-- 显示数据提交或加载状态结束 -->
-
-	<form action="" id="write_blog"><!-- 发文开始 -->
-		<h2 id="blog_h2" class="blog_h2">真正的你就在这字里行间
-			<img class="rotate blog_closed" src="images/closed_btn.png" />
-		</h2>
-		<dl>
-			<dd>主&nbsp; 题：<input type="text" name="blog_title" class="title"></dd>
-			<dd><span>主&nbsp; 体：</span><textarea name="blog_content" id="blog_content"></textarea></dd>
-		</dl>
-		<input class="blog_sub input_bar" type="button" value="发文" disabled="true">
-	</form><!-- 发文结束 -->
-	
-	<div id="show_skin"><!-- 换肤开始 -->
-		<h2 class="show_skin_h2">皮肤预览 <span>默 认</span>
-			<img class="rotate show_skin_closed" src="images/closed_btn.png" />
-		</h2>
-		<div class="skin_box">
-			<div class="skin_img">
-				<img class="show_skin_img" src="images/skin/skin_small_1.jpg" alt=" ">
-				<img class="show_skin_img" src="images/skin/skin_small_2.jpg" alt=" ">
-				<img class="show_skin_img" src="images/skin/skin_small_3.jpg" alt=" ">
-			</div>
-		</div>
-		<strong class="sl">&lt;</strong>
-		<strong class="sr">&gt;</strong>
-		<div class="show_left show_bar"></div>
-		<div class="show_right show_bar"></div>
-		<div class="loading show_loading">
-	        <span></span>
-	        <span></span>
-	        <span></span>
-	        <span></span>
-	        <span></span>
-		</div>
-	</div><!-- 换肤结束 -->
 
 	<footer>
 		<p class="mouse"> 要旅行 —— 联系我们 </p>
 		<p>&copy;Design Your Travel</p>
 	</footer>
+
 	<script src="js/blog.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/check_form.js" type="text/javascript" charset="UTF-8"></script>
 
