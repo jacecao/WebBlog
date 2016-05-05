@@ -579,6 +579,8 @@ $(window).bind('load',function(){
 	$('#blog_content').bind('keyup',check_blog);
 
 	$('#write_blog .blog_sub').click(function(){
+		//发送博文还需要判断是否登陆账户，如果没有登陆账户，那么点击发送时应该弹出登录框
+		//这还没有做？
 		if( check_blog() )
 		{
 			$(this).elements[0].disabled = true;

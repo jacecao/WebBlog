@@ -474,57 +474,185 @@ $(function(){
 		},
 		async:true
 	});
-	//************************************ 换肤 ********************************************
+//************************************ 换肤 ********************************************
+	//全局变量
+	var skin_target = 0;
+	var skin_index = 0;
+	var skin_length = $('#show_skin .show_skin_img').length();
+	var skin_text;
+	//获取已经设置的皮肤******************************
+	$().ajax({
+		method:'post',
+		data:{'type':'recall'},
+		url:'php/get_skin.php',
+		success:function(text){
+			if( text != 'null' )
+			{
+				var json = JSON.parse(text);
+				$('body').css('backgroundImage','url('+json.big_bg+')');
+				$('body').css('backgroundColor',json.bg_color);
+			}
+		},
+		async:true
+	});	
+	//点击换肤程序********************************
+	var change_skin = function()
+	{
+		var big_src = $(this).attr('big_src');
+		var bg_color = $(this).attr('bg_color');
+		$('body').css('backgroundImage','url('+big_src+')');
+		$('body').css('backgroundColor',bg_color);
+		//这里同时将选择的背景图片数据发送给数据库，记录下我们已经设置好的背景
+		//这里应该判断是否已经登陆账户，登陆账户后点击才会发送设置的背景数据
+		$().ajax({
+			method:'post',
+			data:{
+				'type':'set',
+				'big_bg':big_src 
+			},
+			url:'php/get_skin.php',
+			success:function(text){
+				if( text == 1 )
+				{
+					setTimeout(closed_fun( $('#show_skin') ),1500);
+				}
+			},
+			async:true
+		});	
+	};
 	//打开换肤弹出*********************
 	$('#control_bar .skin').click(
-		function()
+	function()
+	{
+		skin_length = $('#show_skin .show_skin_img').length();
+		out();
+		show_fun( $('#show_skin'));
+		if( $('.show_skin_img').length() == 0 )
 		{
-			out();
-			show_fun( $('#show_skin'));
-			//****************** 显示左右切换按钮 *****************
-			$('#show_skin .show_left').hover(
-				function(){_opacity($('#show_skin .sl'),100);},
-				function(){_opacity($('#show_skin .sl'),40);}
-				);
-			$('#show_skin .show_right').hover(
-				function(){_opacity($('#show_skin .sr'),100);},
-				function(){_opacity($('#show_skin .sr'),40);}
-				);
-			//***************** 点击左右按钮 ********************
-			var target = 0;
-			$('#show_skin .show_left').click(function(){
-				target -= 500;
-				if( target < 0 )
-				{
-					target = 1000;
-				}
-				$('#show_skin .skin_img').animate({
-					attr:'left',
-					target:-target
-				});
-			});
-			$('#show_skin .show_right').click(function(){
-				target += 500;
-				if( target == 0 )
-				{
-					target = 1000;
-				}else if( target == 1500 ){
-					target = 0;
-				}
-				$('#show_skin .skin_img').animate({
-					attr:'left',
-					target:-target
-				});
-			});
-		}	
-	);
-	//关闭换肤弹出*********************
-		$('#show_skin .show_skin_closed').click(function(){
-			$('.show_loading').hide();
-			closed_fun( $('#show_skin') );
+			$().ajax({
+				method:'post',
+				data:{'type':'all'},
+				url:'php/get_skin.php',
+				success:function(text){
+					$('#show_skin .show_loading').hide();
+					var json = JSON.parse(text);
+					var html = '';
+					for( var i = 0; i < json.length; i++ ){
+						html += '<img class="show_skin_img" src="'+json[i].small_bg+'" bg_color="'+json[i].bg_color+'" big_src="'+json[i].big_bg+'" alt="'+json[i].bg_text+'">';
+					}
+					$('#show_skin .skin_img').html(html);
+					$('#show_skin .skin_img').css('left',skin_target);
+					//只需要第一张渐变显示出来
+					skin_length = $('#show_skin .show_skin_img').length();
+					$('#show_skin .show_skin_img').find(skin_index).animate({
+						attr:'opacity',
+						target: 100,
+						time:60
+					});
+					var bg_text = $('#show_skin .show_skin_img').find(0).attr('alt');
+					$('.skin_box span').html(bg_text);
+					//******************* 点击图片切换背景 *********************
+					//******************* 注意只有在这里加入点击事件才有用 ******
+					$('#show_skin .show_skin_img').click(change_skin);
+				},
+				async:true
+			});		
+		}else{
+			$('#show_skin .show_skin_img').click(change_skin);
+		}
+	});
+	//****************** 显示左右切换按钮 *****************
+	$('#show_skin .show_left').hover(
+		function(){_opacity($('#show_skin .sl'),100);},
+		function(){_opacity($('#show_skin .sl'),40);}
+		);
+	$('#show_skin .show_right').hover(
+		function(){_opacity($('#show_skin .sr'),100);},
+		function(){_opacity($('#show_skin .sr'),40);}
+		);
+
+	//***************** 点击左右按钮 ********************
+	$('#show_skin .show_left').click(function(){
+		$('#show_skin .show_skin_img').opacity(0);
+		skin_target -= 500;
+		skin_index--;
+		// console.log(skin_target+','+skin_index+','+skin_length);
+		if( skin_index < 0 )
+		{
+			// console.log(skin_target+'...'+skin_index);
+			skin_index = skin_length - 1;
+			skin_target = 1000;
+		}
+		if( skin_target < 0 )
+		{
+			// console.log(skin_target+'.x.'+skin_index);
+			skin_target = 1000;
+			skin_index = skin_length - 1;
+		}
+		$('#show_skin .show_skin_img').find(skin_index).animate({
+			attr:'opacity',
+			target: 100,
+			time:150
 		});
-
-
+		$('#show_skin .skin_img').animate({
+			attr:'left',
+			target:-skin_target
+		});
+		skin_text = $('#show_skin .show_skin_img').find(skin_index).attr('alt');
+		$('.skin_box span').html(skin_text);
+	});
+	$('#show_skin .show_right').click(function(){
+		$('#show_skin .show_skin_img').opacity(0);
+		skin_target += 500;
+		skin_index++;
+		// console.log(skin_target+','+skin_index+','+skin_length);
+		if( skin_index >= skin_length )
+		{
+			// console.log(skin_target+'...'+skin_index);
+			skin_index = 0;
+			skin_target = 0;
+		}
+		if( skin_target >= 1500 ){
+			// console.log(skin_target+'.x.'+skin_index);
+			skin_target = 0;
+			skin_index = 0;
+		}
+		$('#show_skin .show_skin_img').find(skin_index).animate({
+			attr:'opacity',
+			target: 100,
+			time:150
+		});
+		$('#show_skin .skin_img').animate({
+			attr:'left',
+			target:-skin_target
+		});
+		skin_text = $('#show_skin .show_skin_img').find(skin_index).attr('alt');
+		$('.skin_box span').html(skin_text);
+	});
+	//***************** 点击默认按钮 ********************
+	$('.show_skin_h2 span').click(function(){
+		$().ajax({
+			method:'post',
+			data:{'type':'default'},
+			url:'php/get_skin.php',
+			success:function(text){
+				if( text == 1 )
+				{
+					$('body').css('backgroundColor','#eaeaea');
+					$('body').css('backgroundImage','');
+					setTimeout(closed_fun( $('#show_skin') ),1500);
+				}else{
+					setTimeout(closed_fun( $('#show_skin') ),1500);
+				}
+			},
+			async:true
+		});
+	});
+	//关闭换肤弹出*********************
+	$('#show_skin .show_skin_closed').click(function(){
+		$('.show_loading').hide();
+		closed_fun( $('#show_skin') );
+	});
 
 
 
