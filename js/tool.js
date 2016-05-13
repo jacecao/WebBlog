@@ -32,7 +32,7 @@ var getStyle = function( obj, attr )
 //获取视窗大小
 var View_X = window.innerWidth || document.documentElement.clientWidth,
 	View_Y = window.innerHeight || document.documentElement.clientHeight;
-//获取滚动条高度
+//获取或设置滚动条属性值，参数以对象形式传入{attr:value}
 var scroll = function( obj )
 {
 	if( arguments.length == 0 ){
