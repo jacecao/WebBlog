@@ -654,22 +654,45 @@ $(function(){
 		closed_fun( $('#show_skin') );
 	});
 
+//**************返回顶部按钮*******************************
+	var _scroll_run = true;
+	var _timer = null;
+	$(".back_top").click(function(){
+		_timer = setInterval(function(){
+			_scroll_run = true;
+			var _scroll_top = Math.floor( scroll().top/5 );
+			var _value = scroll().top - _scroll_top;
+			//注意这里的判定，取值不对就会出现scrollTop!=0的情况
+			//(可能是一个很少的值，肉眼看不出滚动条是否已经回到顶部)或无法停止ssetInterval()
+			if( _scroll_top <= 1 )
+			{
+				clearInterval(_timer);
+				scroll({top:0});
+			}else{
+				scroll({top:_value });
+			}
+		},30);
+	});
+	$(window).bind('scroll',function(){
+		//注意这里不能直接清除定时器，一旦直接清理掉定时器，那么返回顶部的定时器就没办法运行
+		//因为在返回顶部这个过程中也触发到scroll事件，所以必须给一个判定值_scroll_run来判定
+		!_scroll_run?clearInterval(_timer) : _scroll_run = false;
+		if( scroll().top >= View_Y )
+		{
+			$('.back_top').show();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		}else{
+			$('.back_top').hide();
+		}
+		//判定返回按钮一旦到达底部，那么距离底部的距离应该是一个固定的值
+		var footer_top = $('footer').offset().top + 40;
+		var _scroll_height = View_Y + scroll().top;
+		if( _scroll_height >= footer_top ){
+			$('.back_top').css('bottom',$('footer').offset().height+10+'px');
+		}else{
+			$('.back_top').css('bottom',10+'px');
+		}
+	});
 
 
 

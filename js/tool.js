@@ -33,13 +33,20 @@ var getStyle = function( obj, attr )
 var View_X = window.innerWidth || document.documentElement.clientWidth,
 	View_Y = window.innerHeight || document.documentElement.clientHeight;
 //获取滚动条高度
-var scroll = function()
+var scroll = function( obj )
 {
-	var scroll = {};
-	scroll.top = document.body.scrollTop || document.documentElement.scrollTop;
-	scroll.left = document.body.scrollLeft || document.documentElement.scrollLeft;
-	scroll.height = document.body.scrollHeight || document.documentElement.scrollHeight;
-	return scroll;
+	if( arguments.length == 0 ){
+		var scroll = {};
+		scroll.top = document.body.scrollTop || document.documentElement.scrollTop;
+		scroll.left = document.body.scrollLeft || document.documentElement.scrollLeft;
+		scroll.height = document.body.scrollHeight || document.documentElement.scrollHeight;
+		return scroll;
+	}else{
+		document.body.scrollTop = document.documentElement.scrollTop = obj.top;
+		document.body.scrollLeft = document.documentElement.scrollLeft = obj.left;
+		document.body.scrollHeight = document.documentElement.scrollHeight = obj.height;
+	}
+	
 };
 //阻止默认事件
 var preDef = function( event )
