@@ -1050,7 +1050,7 @@ a{ text-decoration: none; color: gray;}
 		left: 1px;
 		width: 40px;
 		height: 40px;
-		background: url('../images/share.png') no-repeat;
+		background: url('../images/share.PNG') no-repeat;
 	}
 	#share .weixin
 	{
