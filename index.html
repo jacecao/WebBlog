@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><!-- 防止数据库不能识别中文编码 -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><!-- 缺少该值会使数据库返回的中文出现乱码 -->
 	<title>邀旅行</title>
 	<link rel="icon" href="https://raw.githubusercontent.com/jacecao/webblog/gh-pages/images/logo.JPG" type="image/gif"/>
 	<script src="js/tool.js" type="text/javascript" charset="UTF-8"></script>
@@ -14,7 +14,7 @@
 </head>
 <body>
 	
-	<!-- 很奇怪的是把这个模块放在最后会出现布局问题  原因是绝对定位的问题 -->
+	<!-- 把这个模块放在最后会出现布局问题  原因是绝对定位的问题 -->
 	<section><!--弹出窗口 -->
 		<div id="local_screen"></div><!-- 遮罩 -->
 		<div id="loading" class="shadow"><!-- 显示数据提交或加载状态开始 -->
@@ -163,7 +163,9 @@
 						<li class="a set">设置</li>
 						<li class="a skin">换肤</li>
 						<li class="a blog">发文</li>
-						<li class="a exit">退出</li>
+						<li class="a exit">
+							<a class="a haiou" href="http://haiouyun.com/layout/project.html">HioU</a>
+						</li>
 					</ul>
 				</div>
 				<span class="login bar">登录</span>
