@@ -8,4 +8,7 @@
 github没法实现与后台数据交互
 所以没办法在这个平台实现全局演示
 
+页面效果如下：
+![img](https://github.com/jacecao/gif-img/blob/master/webblog.jpg?raw=true)
+
 [演示地址http://jacecao.github.io/webblog/](http://jacecao.github.io/webblog/)
